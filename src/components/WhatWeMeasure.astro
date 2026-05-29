@@ -1,53 +1,57 @@
 ---
-// 4-3. 何を測っているか — 5 軸 + 3 ゲーム
-// 生データの取得方法・スコアリングの数理は書かない(対外向けの粒度に留める)。
+// 4-3. 何を測っているか — 5 軸 + 3 ゲーム。
+// 広幅(wide)でグリッド化し、横の余白を活かす。生データの取得方法・数理は書かない。
 import { AXES, GAMES } from '../config';
 ---
 
 <section class="section">
-  <h2 class="section-title"><span class="marker">何を測っているか</span></h2>
+  <div class="section__inner section__inner--wide">
+    <h2 class="section-title"><span class="marker">何を測っているか</span></h2>
 
-  <div class="card intro">
-    <p>
-      Real You は、ゲーム中の<strong>“無意識の行動”</strong>を計測し、
-      <strong>5 つの軸</strong>であなたの本当の性格を診断します。
-    </p>
-  </div>
+    <div class="card intro">
+      <p>
+        Real You は、ゲーム中の<strong>“無意識の行動”</strong>を計測し、
+        <strong>5 つの軸</strong>であなたの本当の性格を診断します。
+      </p>
+    </div>
 
-  <!-- 5 つの診断軸 -->
-  <h3 class="block-title">5 つの診断軸</h3>
-  <ul class="axes">
-    {
-      AXES.map((axis) => (
-        <li class="axis">
-          <span class="axis-emoji">{axis.emoji}</span>
-          <span class="axis-name">{axis.name}</span>
-          <span class="axis-range">{axis.range}</span>
-        </li>
-      ))
-    }
-  </ul>
+    <!-- 5 つの診断軸: 横並びグリッド -->
+    <h3 class="block-title">5 つの診断軸</h3>
+    <ul class="axes">
+      {
+        AXES.map((axis, i) => (
+          <li class="axis">
+            <span class="axis-no">{String(i + 1).padStart(2, '0')}</span>
+            <span class="axis-name">{axis.name}</span>
+            <span class="axis-range">{axis.range}</span>
+          </li>
+        ))
+      }
+    </ul>
 
-  <!-- 3 つのゲーム -->
-  <h3 class="block-title">3 つのゲームで計測</h3>
-  <div class="games">
-    {
-      GAMES.map((game) => (
-        <article class="game" style={`--game-accent: ${game.accent}`}>
-          <div class="game-no">GAME {game.no}</div>
-          <h4 class="game-title">{game.title}</h4>
-          <p class="game-summary">{game.summary}</p>
-        </article>
-      ))
-    }
+    <!-- 3 つのゲーム: 横並びカード + 巨大ゴースト数字 -->
+    <h3 class="block-title">3 つのゲームで計測</h3>
+    <div class="games">
+      {
+        GAMES.map((game) => (
+          <article class="game" style={`--game-accent: ${game.accent}`}>
+            <span class="game-ghost" aria-hidden="true">{game.no}</span>
+            <div class="game-no">GAME {game.no}</div>
+            <h4 class="game-title">{game.title}</h4>
+            <p class="game-summary">{game.summary}</p>
+          </article>
+        ))
+      }
+    </div>
   </div>
 </section>
 
 <style>
   .intro {
-    font-size: clamp(1.05rem, 4.5vw, 1.25rem);
+    max-width: var(--max-content);
+    font-size: clamp(1.1rem, 4.5vw, 1.4rem);
     font-weight: 700;
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
   }
 
   .intro strong {
@@ -55,65 +59,84 @@ import { AXES, GAMES } from '../config';
   }
 
   .block-title {
-    font-size: 1.25rem;
-    margin: 2rem 0 1rem;
+    font-size: clamp(1.3rem, 4vw, 1.6rem);
+    font-weight: 900;
+    margin: 2.5rem 0 1.25rem;
   }
 
-  /* 5 軸: 縦並びのタグ */
+  /* 5 軸: 画面幅に応じて自動で列数が変わるグリッド(wide で最大5列) */
   .axes {
     list-style: none;
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 0.9rem;
   }
 
   .axis {
-    display: grid;
-    grid-template-columns: auto auto 1fr;
-    align-items: center;
-    gap: 0.6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
     background: var(--cream);
     border: var(--border);
-    border-radius: 14px;
-    box-shadow: 4px 4px 0 var(--ink);
-    padding: 0.7rem 1rem;
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    padding: 1rem 1.1rem;
   }
 
-  .axis-emoji {
-    font-size: 1.4rem;
+  .axis-no {
+    font-size: 2.2rem;
+    font-weight: 900;
+    line-height: 1;
+    color: var(--accent-red);
+    font-variant-numeric: tabular-nums;
   }
 
   .axis-name {
     font-weight: 900;
-    font-size: 1.1rem;
+    font-size: 1.25rem;
   }
 
   .axis-range {
-    text-align: right;
     color: var(--text-sub);
     font-weight: 700;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
   }
 
-  /* 3 ゲーム: カード */
+  /* 3 ゲーム: モバイル1列 → PC 3列 */
   .games {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.1rem;
   }
 
   .game {
+    position: relative;
+    overflow: hidden;
     background: var(--card);
     border: var(--border);
-    border-left: 12px solid var(--game-accent);
+    border-top: 12px solid var(--game-accent);
     border-radius: 16px;
-    box-shadow: 4px 4px 0 var(--ink);
-    padding: 1.1rem 1.25rem;
+    box-shadow: var(--shadow);
+    padding: 1.25rem 1.35rem 1.4rem;
+  }
+
+  /* カード右下に巨大なゴースト数字を敷いて密度と個性を出す(P5) */
+  .game-ghost {
+    position: absolute;
+    right: 0.4rem;
+    bottom: -1.5rem;
+    font-size: 7rem;
+    font-weight: 900;
+    line-height: 1;
+    color: var(--game-accent);
+    opacity: 0.1;
+    pointer-events: none;
   }
 
   .game-no {
+    position: relative;
     font-weight: 900;
     font-size: 0.85rem;
     color: var(--game-accent);
@@ -121,20 +144,21 @@ import { AXES, GAMES } from '../config';
   }
 
   .game-title {
-    font-size: 1.3rem;
-    margin: 0.2rem 0 0.4rem;
+    position: relative;
+    font-size: 1.4rem;
+    margin: 0.2rem 0 0.5rem;
   }
 
   .game-summary {
+    position: relative;
     color: var(--text-sub);
     font-weight: 700;
     font-size: 0.95rem;
   }
 
-  /* PC では 5 軸を 2 段組みっぽく(横に余裕がある時) */
-  @media (min-width: 600px) {
-    .axis-range {
-      font-size: 1rem;
+  @media (min-width: 720px) {
+    .games {
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 </style>

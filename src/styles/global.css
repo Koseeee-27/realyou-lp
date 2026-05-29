@@ -19,16 +19,21 @@
   --accent-pink-bg: #fdf2f8;
   --text-sub: #555;
 
-  /* 枠線 / 影(新ブルータリズム) */
+  /* 枠線 / 影(新ブルータリズム)。影は半透明をやめ「黒のハード影」で統一 */
   --border: 4px solid var(--ink);
   --border-thick: 6.5px solid var(--ink);
   --radius: 20px;
   --radius-lg: 28px;
   --shadow: 6px 6px 0px var(--ink);
-  --shadow-lg: 12px 12px 0px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 10px 10px 0px var(--ink);
 
-  /* レイアウト */
-  --max-width: 720px; /* モバイルファースト。PC でも横に広がりすぎない 1 カラム */
+  /* レイアウト: コンテンツの性質で幅を 3 階層に分ける
+   *  wide    = 見せ物(構成図・スクショ・カードグリッド)
+   *  content = 読み物(説明文)
+   *  narrow  = キメ台詞(1 文だけ細く置く) */
+  --max-wide: 1080px;
+  --max-content: 760px;
+  --max-narrow: 580px;
   --space: 1.25rem;
 }
 
@@ -77,11 +82,40 @@ a {
 
 /* --- 共通ユーティリティ --- */
 
-/* セクションの外枠。1 カラムで中央寄せ */
+/* セクション = 全幅の「帯」。縦パディングだけ持ち、横幅は内側の __inner で制御する。
+ * これで背景を全幅で塗り分けつつ、コンテンツ幅をセクションごとに選べる(P1/P2)。 */
 .section {
-  max-width: var(--max-width);
+  padding: 3.25rem 0;
+}
+
+.section__inner {
+  max-width: var(--max-content);
   margin: 0 auto;
-  padding: 3.5rem var(--space);
+  padding: 0 var(--space);
+}
+
+.section__inner--wide {
+  max-width: var(--max-wide);
+}
+
+.section__inner--narrow {
+  max-width: var(--max-narrow);
+}
+
+/* 背景帯のバリエーション。黒の上下ボーダーで「ブロックを叩きつける」区切りを作る */
+.section--white {
+  background: var(--card);
+  border-block: var(--border-thick);
+}
+
+.section--cream {
+  background: var(--cream);
+  border-block: var(--border-thick);
+}
+
+/* 帯の切り替わりに合わせて縦リズムも変える(広めの帯) */
+.section--roomy {
+  padding: 4.5rem 0;
 }
 
 /* 新ブルータリズムのカード */
@@ -93,20 +127,23 @@ a {
   padding: 1.75rem;
 }
 
-/* セクション見出し: 黒縁の太字 */
+/* セクション見出し: 黒縁の太字。Hero と地続きの迫力を出すため大きめに */
 .section-title {
-  font-size: clamp(1.6rem, 6vw, 2.2rem);
+  font-size: clamp(2rem, 7vw, 3rem);
   font-weight: 900;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.75rem;
   display: inline-block;
 }
 
 .section-title .marker {
+  display: inline-block;
   background: var(--accent-yellow);
   border: 3px solid var(--ink);
   border-radius: 12px;
   padding: 0.1em 0.45em;
   box-shadow: 4px 4px 0 var(--ink);
+  /* わずかに傾けて Hero の mark とトーンを揃える(P5) */
+  transform: rotate(-1.5deg);
 }
 
 /* CTA ボタン(新ブルータリズム) */

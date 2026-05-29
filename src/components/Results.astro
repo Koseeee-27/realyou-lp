@@ -15,7 +15,8 @@ const SHOTS: Shot[] = [
 ];
 ---
 
-<section class="section">
+<section class="section section--cream section--roomy">
+  <div class="section__inner section__inner--wide">
   <h2 class="section-title"><span class="marker">結果の可視化</span></h2>
 
   <div class="card lead-card">
@@ -34,7 +35,7 @@ const SHOTS: Shot[] = [
           ) : (
             <div class="placeholder">
               <div>
-                📊 {shot.caption}
+                {shot.caption}
                 <br />
                 <small>本編から撮影 → public/ に配置で差し替え</small>
               </div>
@@ -45,13 +46,15 @@ const SHOTS: Shot[] = [
       ))
     }
   </div>
+  </div>
 </section>
 
 <style>
   .lead-card {
-    font-size: clamp(1.05rem, 4.5vw, 1.25rem);
+    max-width: var(--max-content);
+    font-size: clamp(1.1rem, 4.5vw, 1.4rem);
     font-weight: 700;
-    margin-bottom: 2rem;
+    margin-bottom: 2.25rem;
   }
 
   .lead-card strong {
@@ -59,9 +62,15 @@ const SHOTS: Shot[] = [
   }
 
   .shots {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr;
     gap: 1.5rem;
+  }
+
+  @media (min-width: 720px) {
+    .shots {
+      grid-template-columns: 1fr 1fr;
+    }
   }
 
   .shot {

@@ -102,9 +102,9 @@ realyou-lp/
 ### 4-7. フッター
 - チーム名：**チーム6 遅刻ラーメン**
 - リンク 3 つ：
-  - GitHub: `https://github.com/kc3hack/2026_team6`
-  - デモ動画: ※ **要確認**（README は `https://youtu.be/yqQI1Z4WQOc`、project.md は別 URL。正しい方を確定する）
-  - デプロイ先（アプリ本編）: `https://2026-team6.vercel.app/`
+  - GitHub: `https://github.com/Koseeee-27/real-you`（本編の最新リポジトリ）
+  - デモ動画: `https://youtu.be/yqQI1Z4WQOc`
+  - デプロイ先（アプリ本編・最新）: `https://realyou-jp.vercel.app/`
 - CTA 再掲（「今すぐ本当の自分に会う」など）
 
 ---

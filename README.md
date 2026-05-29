@@ -3,7 +3,8 @@
 技育博 vol.1 の展示で使う、Real You の紹介・技術ショーケースサイト。
 QR から着地 → CTA でアプリ本編へ誘導する 1 ページの静的サイト。
 
-- アプリ本編: https://2026-team6.vercel.app/
+- アプリ本編（最新デプロイ）: https://realyou-jp.vercel.app/
+- アプリ本編リポジトリ: https://github.com/Koseeee-27/real-you
 - 仕様書: [`docs/spec.md`](docs/spec.md)
 
 ## 技術構成
@@ -48,7 +49,7 @@ realyou-lp/
 | システム構成図 | Excalidraw で作成 → `public/architecture.svg` に配置し、`src/components/TechStack.astro` の `ARCH_IMAGE` を `'/architecture.svg'` に変更 |
 | 結果画面スクショ | 本編から撮影 → `public/` に配置し、`src/components/Results.astro` の `SHOTS[].src` を実ファイルパスに変更 |
 
-## Astro 初学者メモ（React/Next 経験者向け）
+## Astro 初学者メモ
 
 - `.astro` は front matter（`---` 内・ビルド時に1回実行）＋ HTML テンプレート。`className` ではなく **`class`**。
 - ルーティングは `src/pages/` 配下のファイル＝パス。`index.astro` が `/`。

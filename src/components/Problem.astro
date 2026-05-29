@@ -1,25 +1,35 @@
 ---
-// 4-2. 課題 — 性格診断のバイアス問題
+// 4-2. 課題 — 性格診断のバイアス問題。
+// 白の全幅帯 + 狭幅センターで「広い→狭い」のリズムを作り、キメ台詞を強調する。
 ---
 
-<section class="section">
-  <h2 class="section-title"><span class="marker">課題</span></h2>
+<section class="section section--white">
+  <div class="section__inner section__inner--narrow">
+    <h2 class="section-title"><span class="marker">課題</span></h2>
 
-  <div class="card">
-    <p class="lead">
-      MBTI などの性格診断は、つい<strong>「こうありたい自分」</strong>で答えてしまう。
-    </p>
-    <p class="sub">
-      質問に答えるのは“意識のある自分”。だから、本当の自分は分からないまま。
-    </p>
+    <div class="card">
+      <p class="lead">
+        MBTI などの性格診断は、つい<strong>「こうありたい自分」</strong>で答えてしまう。
+      </p>
+      <p class="sub">
+        質問に答えるのは“意識のある自分”。だから、本当の自分は分からないまま。
+      </p>
+    </div>
   </div>
 </section>
 
 <style>
+  .card {
+    /* 課題=赤系の薄背景で「全部白カード」の平板さを崩す(P5) */
+    background: #fff2f2;
+    border-left: 12px solid var(--accent-red);
+  }
+
   .lead {
-    font-size: clamp(1.15rem, 5vw, 1.5rem);
+    font-size: clamp(1.35rem, 6vw, 1.9rem);
     font-weight: 900;
-    margin-bottom: 0.75rem;
+    line-height: 1.4;
+    margin-bottom: 0.9rem;
   }
 
   .lead strong {
@@ -29,5 +39,6 @@
   .sub {
     color: var(--text-sub);
     font-weight: 700;
+    font-size: 0.95rem;
   }
 </style>

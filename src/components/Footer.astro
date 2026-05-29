@@ -3,19 +3,21 @@
 import { LINKS, TEAM_NAME } from '../config';
 ---
 
-<footer class="footer section">
-  <!-- CTA 再掲 -->
-  <a class="cta" href={LINKS.app} target="_blank" rel="noopener noreferrer">
-    今すぐ本当の自分に会う →
-  </a>
+<footer class="footer section section--white">
+  <div class="section__inner">
+    <!-- CTA 再掲 -->
+    <a class="cta" href={LINKS.app} target="_blank" rel="noopener noreferrer">
+      今すぐ本当の自分に会う →
+    </a>
 
-  <nav class="links">
-    <a href={LINKS.github} target="_blank" rel="noopener noreferrer">GitHub</a>
-    <a href={LINKS.demo} target="_blank" rel="noopener noreferrer">デモ動画</a>
-    <a href={LINKS.app} target="_blank" rel="noopener noreferrer">アプリを開く</a>
-  </nav>
+    <nav class="links">
+      <a href={LINKS.github} target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href={LINKS.demo} target="_blank" rel="noopener noreferrer">デモ動画</a>
+      <a href={LINKS.app} target="_blank" rel="noopener noreferrer">アプリを開く</a>
+    </nav>
 
-  <p class="team">{TEAM_NAME}</p>
+    <p class="team">{TEAM_NAME}</p>
+  </div>
 </footer>
 
 <style>

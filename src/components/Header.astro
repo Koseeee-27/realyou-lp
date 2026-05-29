@@ -1,0 +1,114 @@
+---
+// サイトヘッダー — ロゴ(ブランドマーク)の定位置。
+// Hero に小さく置くと浮いて見えたため、画面上部の細いバーに移設。
+// 右側に GitHub と CTA を置き、常に「診断する」導線を残す。
+import { APP_URL, LINKS } from '../config';
+---
+
+<header class="site-header">
+  <div class="bar">
+    <a class="brand" href="/" aria-label="Real You トップ">
+      Real<span class="brand-y">You</span>
+    </a>
+
+    <nav class="nav">
+      <a class="nav-link" href={LINKS.github} target="_blank" rel="noopener noreferrer">
+        GitHub
+      </a>
+      <a class="nav-cta" href={APP_URL} target="_blank" rel="noopener noreferrer">
+        診断する
+      </a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: #fff;
+    border-bottom: var(--border);
+  }
+
+  .bar {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0.5rem var(--space);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  /* テキストロゴ(ワードマーク)。小サイズでも潰れず読める */
+  .brand {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.15em;
+    font-weight: 900;
+    font-size: 1.4rem;
+    letter-spacing: 0.01em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  /* "You" を黄色マーカーで強調してブランドのアクセントに */
+  .brand-y {
+    background: var(--accent-yellow);
+    border: 2.5px solid var(--ink);
+    border-radius: 8px;
+    padding: 0 0.18em;
+    line-height: 1.1;
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .nav-link {
+    font-weight: 900;
+    font-size: 0.9rem;
+    text-decoration: none;
+    color: var(--ink);
+  }
+
+  .nav-link:hover {
+    text-decoration: underline;
+  }
+
+  .nav-cta {
+    font-weight: 900;
+    font-size: 0.9rem;
+    text-decoration: none;
+    color: var(--ink);
+    background: var(--accent-red);
+    border: 3px solid var(--ink);
+    border-radius: 999px;
+    box-shadow: 3px 3px 0 var(--ink);
+    padding: 0.35rem 1rem;
+    transition: transform 0.08s ease, box-shadow 0.08s ease;
+  }
+
+  .nav-cta:active {
+    transform: translate(3px, 3px);
+    box-shadow: 0 0 0 var(--ink);
+  }
+
+  @media (min-width: 860px) {
+    .brand {
+      font-size: 1.6rem;
+    }
+
+    .nav {
+      gap: 1.25rem;
+    }
+
+    .nav-link,
+    .nav-cta {
+      font-size: 1rem;
+    }
+  }
+</style>

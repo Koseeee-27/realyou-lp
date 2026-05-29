@@ -26,3 +26,6 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# design screenshots (visual loop)
+.screenshots/

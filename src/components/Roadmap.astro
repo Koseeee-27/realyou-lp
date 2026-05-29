@@ -2,17 +2,14 @@
 // 4-6. 今後の展望 — 軽いトーンで 3 つ
 const ITEMS = [
   {
-    emoji: '🎮',
     title: 'ゲームの追加',
     body: '色々なシチュエーションのゲームを増やして、多角的に診断。',
   },
   {
-    emoji: '🎯',
     title: '診断ロジックの精度向上',
     body: '行動データからもっと正確に性格を導けるよう進化中。',
   },
   {
-    emoji: '📈',
     title: 'データ蓄積でもっと面白く',
     body: 'ユーザーが増えるほど「みんなとの違い」の比較が充実。',
   },
@@ -20,13 +17,14 @@ const ITEMS = [
 ---
 
 <section class="section">
+  <div class="section__inner section__inner--wide">
   <h2 class="section-title"><span class="marker">今後の展望</span></h2>
 
   <ol class="roadmap">
     {
-      ITEMS.map((item) => (
+      ITEMS.map((item, i) => (
         <li class="item card">
-          <span class="emoji">{item.emoji}</span>
+          <span class="num">{String(i + 1).padStart(2, '0')}</span>
           <div>
             <h3 class="item-title">{item.title}</h3>
             <p class="item-body">{item.body}</p>
@@ -35,6 +33,7 @@ const ITEMS = [
       ))
     }
   </ol>
+  </div>
 </section>
 
 <style>
@@ -42,21 +41,31 @@ const ITEMS = [
     list-style: none;
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr;
     gap: 1rem;
   }
 
   .item {
     display: flex;
+    flex-direction: column;
     align-items: flex-start;
-    gap: 1rem;
+    gap: 0.5rem;
   }
 
-  .emoji {
-    font-size: 2rem;
+  .num {
+    font-size: 2.6rem;
+    font-weight: 900;
     line-height: 1;
     flex-shrink: 0;
+    color: var(--accent-red);
+    font-variant-numeric: tabular-nums;
+  }
+
+  @media (min-width: 720px) {
+    .roadmap {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
 
   .item-title {

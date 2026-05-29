@@ -1,13 +1,16 @@
 ---
 // 4-4. 技術スタック + アーキテクチャ
-// システム構成図は Excalidraw で別途作成 → public/architecture.svg を置けば差し替わる。
+// - システム構成図は Excalidraw 作成後 public/architecture.svg を置けば差し替わる。
+// - 技術スタックはブランドカラーのロゴで表示し、各カードは公式ドキュメントへリンク。
+//   ロゴ(モノクロSVG)は public/tech/ に配置し、CSS mask でブランド色に着色する。
 import { TECH_STACK } from '../config';
 
 // 図が用意できたら ARCH_IMAGE を '/architecture.svg' に変えるだけ(プレースホルダ自動解除)
-const ARCH_IMAGE: string | null = null;
+const ARCH_IMAGE: string | null = '/architecture.svg';
 ---
 
-<section class="section">
+<section class="section section--white section--roomy">
+  <div class="section__inner section__inner--wide">
   <h2 class="section-title"><span class="marker">技術スタック</span></h2>
 
   <!-- システム構成図(Excalidraw で作成後、public/ に置いて差し替え) -->
@@ -18,7 +21,7 @@ const ARCH_IMAGE: string | null = null;
       ) : (
         <div class="placeholder arch-placeholder">
           <div>
-            🖼 システム構成図
+            システム構成図
             <br />
             <small>
               Excalidraw で作成 →{' '}
@@ -29,18 +32,39 @@ const ARCH_IMAGE: string | null = null;
       )
     }
   </div>
+  {ARCH_IMAGE && <p class="arch-scroll-hint">← 横にスワイプで全体表示 →</p>}
 
-  <!-- 技術スタック一覧(選定理由つき) -->
+  <p class="hint">各技術をタップすると公式ドキュメントが開きます。</p>
+
+  <!-- 技術スタック(ブランドロゴ + 公式ドキュメントリンク) -->
   <div class="stack">
     {
       TECH_STACK.map((group) => (
-        <div class="layer card">
+        <div class="layer">
           <h3 class="layer-name">{group.layer}</h3>
           <ul class="items">
             {group.items.map((item) => (
-              <li class="item">
-                <span class="item-name">{item.name}</span>
-                <span class="item-reason">{item.reason}</span>
+              <li>
+                <a
+                  class="tech"
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={`--tech-color: ${item.color}`}
+                >
+                  {item.icon ? (
+                    <span
+                      class="tech-logo"
+                      style={`--icon: url(/tech/${item.icon}.svg)`}
+                    />
+                  ) : (
+                    <span class="tech-logo is-text">{item.name.charAt(0)}</span>
+                  )}
+                  <span class="tech-text">
+                    <span class="tech-name">{item.name}</span>
+                    <span class="tech-reason">{item.reason}</span>
+                  </span>
+                </a>
               </li>
             ))}
           </ul>
@@ -48,11 +72,12 @@ const ARCH_IMAGE: string | null = null;
       ))
     }
   </div>
+  </div>
 </section>
 
 <style>
   .arch {
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
   }
 
   .arch-img {
@@ -61,6 +86,34 @@ const ARCH_IMAGE: string | null = null;
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
     background: #fff;
+  }
+
+  /* スマホでは横長図を縮小しすぎると文字が潰れるので、
+   * 読める最小幅を保ち横スクロール(スワイプ)で見せる */
+  .arch-scroll-hint {
+    display: none;
+  }
+
+  @media (max-width: 620px) {
+    .arch {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      /* スクロール領域だと分かるよう枠は内側の画像に持たせ、外はパディングのみ */
+      padding-bottom: 0.5rem;
+    }
+
+    .arch-img {
+      width: 560px;
+      max-width: none;
+    }
+
+    .arch-scroll-hint {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-sub);
+      margin: 0.4rem 0 0;
+    }
   }
 
   .arch-placeholder {
@@ -78,42 +131,113 @@ const ARCH_IMAGE: string | null = null;
     padding: 0.05em 0.35em;
   }
 
+  .hint {
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--text-sub);
+    margin-bottom: 1.75rem;
+  }
+
   .stack {
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 1.75rem;
   }
 
   .layer-name {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     margin-bottom: 0.9rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 3px dashed var(--ink);
+    display: inline-block;
+    border-bottom: 4px solid var(--ink);
+    padding-bottom: 0.2rem;
   }
 
   .items {
     list-style: none;
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.7rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
   }
 
-  .item {
+  /* 技術カード = 公式ドキュメントへのリンク */
+  .tech {
     display: flex;
-    flex-direction: column;
-    gap: 0.15rem;
+    align-items: center;
+    gap: 0.85rem;
+    background: #fff;
+    border: var(--border);
+    border-radius: 14px;
+    box-shadow: 4px 4px 0 var(--ink);
+    padding: 0.8rem 1rem;
+    text-decoration: none;
+    color: var(--ink);
+    transition: transform 0.08s ease, box-shadow 0.08s ease;
   }
 
-  .item-name {
+  .tech:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--ink);
+  }
+
+  .tech:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 var(--ink);
+  }
+
+  /* ロゴ: モノクロSVG を mask でブランド色に着色 */
+  .tech-logo {
+    flex-shrink: 0;
+    width: 30px;
+    height: 30px;
+    background-color: var(--tech-color);
+    -webkit-mask: var(--icon) center / contain no-repeat;
+    mask: var(--icon) center / contain no-repeat;
+  }
+
+  /* ロゴが無い技術は頭文字を色付きの四角で表示 */
+  .tech-logo.is-text {
+    display: grid;
+    place-items: center;
+    background-color: var(--tech-color);
+    color: #fff;
+    font-weight: 900;
+    font-size: 1rem;
+    border-radius: 7px;
+    -webkit-mask: none;
+    mask: none;
+  }
+
+  .tech-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    min-width: 0;
+  }
+
+  .tech-name {
     font-weight: 900;
     font-size: 1rem;
   }
 
-  .item-reason {
+  .tech-reason {
     color: var(--text-sub);
     font-weight: 700;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
+  }
+
+  /* PC: 横幅を活かしてカードグリッドを 2→3 カラムに */
+  @media (min-width: 680px) {
+    .items {
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+  }
+
+  @media (min-width: 960px) {
+    .items {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
 </style>
