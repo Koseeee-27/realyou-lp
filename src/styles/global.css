@@ -1,0 +1,151 @@
+/*
+ * Real You LP - グローバルデザインシステム
+ * 本編アプリの「新ブルータリズム」を踏襲:
+ *   太い黒枠 + ハードシャドウ(blur なし offset) + 角丸 + 黄色背景 + M PLUS Rounded 1c
+ * 本編 frontend/src/app/globals.css のトークンから抽出。
+ */
+
+:root {
+  /* カラー */
+  --bg: #f0f380; /* メインの黄色背景 */
+  --ink: #000; /* 枠線・影・テキストの黒 */
+  --card: #fff; /* カード背景 */
+  --cream: #fffce8; /* やや暖色の白(補助カード) */
+  --accent-yellow: #fef08a;
+  --accent-red: #f87171;
+  --accent-blue: #4d85ff;
+  --accent-blue-bg: #eff6ff;
+  --accent-pink: #db2777;
+  --accent-pink-bg: #fdf2f8;
+  --text-sub: #555;
+
+  /* 枠線 / 影(新ブルータリズム) */
+  --border: 4px solid var(--ink);
+  --border-thick: 6.5px solid var(--ink);
+  --radius: 20px;
+  --radius-lg: 28px;
+  --shadow: 6px 6px 0px var(--ink);
+  --shadow-lg: 12px 12px 0px rgba(0, 0, 0, 0.15);
+
+  /* レイアウト */
+  --max-width: 720px; /* モバイルファースト。PC でも横に広がりすぎない 1 カラム */
+  --space: 1.25rem;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: 'M PLUS Rounded 1c', system-ui, -apple-system, sans-serif;
+  color: #1a1a1a;
+  background-color: var(--bg);
+  /* 本編と同じドットパターン背景 */
+  background-image: radial-gradient(circle, #fff 2px, transparent 2px);
+  background-size: 22px 22px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 900;
+  line-height: 1.3;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+}
+
+/* --- 共通ユーティリティ --- */
+
+/* セクションの外枠。1 カラムで中央寄せ */
+.section {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 3.5rem var(--space);
+}
+
+/* 新ブルータリズムのカード */
+.card {
+  background: var(--card);
+  border: var(--border-thick);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: 1.75rem;
+}
+
+/* セクション見出し: 黒縁の太字 */
+.section-title {
+  font-size: clamp(1.6rem, 6vw, 2.2rem);
+  font-weight: 900;
+  margin-bottom: 1.5rem;
+  display: inline-block;
+}
+
+.section-title .marker {
+  background: var(--accent-yellow);
+  border: 3px solid var(--ink);
+  border-radius: 12px;
+  padding: 0.1em 0.45em;
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+/* CTA ボタン(新ブルータリズム) */
+.cta {
+  display: inline-block;
+  font-weight: 900;
+  font-size: clamp(1.05rem, 4.5vw, 1.3rem);
+  text-decoration: none;
+  color: var(--ink);
+  background: var(--accent-red);
+  border: var(--border-thick);
+  border-radius: 999px;
+  padding: 0.9rem 2rem;
+  box-shadow: var(--shadow);
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
+}
+
+.cta:active {
+  transform: translate(4px, 4px);
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
+/* 画像未用意のプレースホルダ枠(後で差し替え) */
+.placeholder {
+  border: 4px dashed var(--ink);
+  border-radius: var(--radius);
+  background: repeating-linear-gradient(
+    45deg,
+    #fff,
+    #fff 12px,
+    #f7f7f7 12px,
+    #f7f7f7 24px
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-weight: 900;
+  color: var(--text-sub);
+  padding: 2rem 1rem;
+  min-height: 200px;
+}

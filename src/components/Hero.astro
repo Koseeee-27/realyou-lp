@@ -1,0 +1,64 @@
+---
+// 4-1. Hero — プロダクト名 / コンセプト / ロゴ / CTA
+import { APP_URL } from '../config';
+---
+
+<header class="hero section">
+  <img class="logo" src="/logo.png" alt="Real You ロゴ" width="640" height="360" />
+
+  <h1 class="title">
+    Real You<br />
+    <span class="subtitle">〜本当の私じゃだめですか？〜</span>
+  </h1>
+
+  <p class="concept">その診断、<mark>“理想の自分”</mark>で答えてない？</p>
+
+  <!-- CTA: 別タブでアプリ本編へ -->
+  <a class="cta" href={APP_URL} target="_blank" rel="noopener noreferrer">
+    無料で診断する →
+  </a>
+</header>
+
+<style>
+  .hero {
+    text-align: center;
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
+
+  .logo {
+    width: min(80%, 360px);
+    height: auto;
+    margin: 0 auto 1rem;
+  }
+
+  .title {
+    font-size: clamp(2.4rem, 11vw, 3.6rem);
+    letter-spacing: 0.02em;
+    /* 黒縁の白抜き文字(本編の text-shadow 多重がけ) */
+    color: #fff;
+    text-shadow:
+      -2.5px -2.5px 0 #000,
+      2.5px -2.5px 0 #000,
+      -2.5px 2.5px 0 #000,
+      2.5px 2.5px 0 #000,
+      4px 4px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  .subtitle {
+    font-size: clamp(1rem, 4.5vw, 1.4rem);
+  }
+
+  .concept {
+    font-size: clamp(1.05rem, 4.8vw, 1.4rem);
+    font-weight: 900;
+    margin: 1.5rem auto 2rem;
+    max-width: 22em;
+  }
+
+  .concept mark {
+    background: var(--accent-yellow);
+    border-radius: 6px;
+    padding: 0.05em 0.25em;
+  }
+</style>

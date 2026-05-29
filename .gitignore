@@ -1,0 +1,28 @@
+# build output
+dist/
+.output/
+
+# dependencies
+node_modules/
+
+# generated types (Astro)
+.astro/
+
+# environment
+.env
+.env.production
+
+# macOS
+.DS_Store
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# editor
+.vscode/
+.idea/
+
+# vercel
+.vercel

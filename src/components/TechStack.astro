@@ -1,0 +1,119 @@
+---
+// 4-4. 技術スタック + アーキテクチャ
+// システム構成図は Excalidraw で別途作成 → public/architecture.svg を置けば差し替わる。
+import { TECH_STACK } from '../config';
+
+// 図が用意できたら ARCH_IMAGE を '/architecture.svg' に変えるだけ(プレースホルダ自動解除)
+const ARCH_IMAGE: string | null = null;
+---
+
+<section class="section">
+  <h2 class="section-title"><span class="marker">技術スタック</span></h2>
+
+  <!-- システム構成図(Excalidraw で作成後、public/ に置いて差し替え) -->
+  <div class="arch">
+    {
+      ARCH_IMAGE ? (
+        <img src={ARCH_IMAGE} alt="システム構成図" class="arch-img" />
+      ) : (
+        <div class="placeholder arch-placeholder">
+          <div>
+            🖼 システム構成図
+            <br />
+            <small>
+              Excalidraw で作成 →{' '}
+              <code>public/architecture.svg</code> に配置で差し替え
+            </small>
+          </div>
+        </div>
+      )
+    }
+  </div>
+
+  <!-- 技術スタック一覧(選定理由つき) -->
+  <div class="stack">
+    {
+      TECH_STACK.map((group) => (
+        <div class="layer card">
+          <h3 class="layer-name">{group.layer}</h3>
+          <ul class="items">
+            {group.items.map((item) => (
+              <li class="item">
+                <span class="item-name">{item.name}</span>
+                <span class="item-reason">{item.reason}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .arch {
+    margin-bottom: 2rem;
+  }
+
+  .arch-img {
+    width: 100%;
+    border: var(--border-thick);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    background: #fff;
+  }
+
+  .arch-placeholder {
+    min-height: 240px;
+  }
+
+  .arch-placeholder small {
+    font-weight: 700;
+    font-size: 0.8rem;
+  }
+
+  .arch-placeholder code {
+    background: var(--accent-yellow);
+    border-radius: 4px;
+    padding: 0.05em 0.35em;
+  }
+
+  .stack {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .layer-name {
+    font-size: 1.3rem;
+    margin-bottom: 0.9rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 3px dashed var(--ink);
+  }
+
+  .items {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+
+  .item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .item-name {
+    font-weight: 900;
+    font-size: 1rem;
+  }
+
+  .item-reason {
+    color: var(--text-sub);
+    font-weight: 700;
+    font-size: 0.85rem;
+  }
+</style>

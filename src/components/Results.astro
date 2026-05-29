@@ -1,0 +1,89 @@
+---
+// 4-5. 結果の可視化 — 結果画面スクショ(自認 vs 実測レーダー、平均比較バー)
+// スクショ未用意のためプレースホルダ。public/ に置いて配列を埋めれば差し替わる。
+
+interface Shot {
+  src: string;
+  alt: string;
+  caption: string;
+}
+
+// スクショができたら src を実ファイルに差し替える(例: '/result-radar.png')
+const SHOTS: Shot[] = [
+  { src: '', alt: '自認 vs 実測のレーダーチャート', caption: '自認 vs 実測のレーダーチャート' },
+  { src: '', alt: '全ユーザー平均との比較バーチャート', caption: '全ユーザー平均との比較' },
+];
+---
+
+<section class="section">
+  <h2 class="section-title"><span class="marker">結果の可視化</span></h2>
+
+  <div class="card lead-card">
+    <p>
+      診断の結果は、<strong>「自分が思う自分」</strong>と
+      <strong>「行動が示す自分」</strong>のギャップで見せます。
+    </p>
+  </div>
+
+  <div class="shots">
+    {
+      SHOTS.map((shot) => (
+        <figure class="shot">
+          {shot.src ? (
+            <img src={shot.src} alt={shot.alt} class="shot-img" />
+          ) : (
+            <div class="placeholder">
+              <div>
+                📊 {shot.caption}
+                <br />
+                <small>本編から撮影 → public/ に配置で差し替え</small>
+              </div>
+            </div>
+          )}
+          <figcaption class="shot-caption">{shot.caption}</figcaption>
+        </figure>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .lead-card {
+    font-size: clamp(1.05rem, 4.5vw, 1.25rem);
+    font-weight: 700;
+    margin-bottom: 2rem;
+  }
+
+  .lead-card strong {
+    color: var(--accent-pink);
+  }
+
+  .shots {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .shot {
+    margin: 0;
+  }
+
+  .shot-img {
+    width: 100%;
+    border: var(--border-thick);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .shot-caption {
+    text-align: center;
+    font-weight: 900;
+    margin-top: 0.75rem;
+    color: var(--text-sub);
+  }
+
+  .placeholder small {
+    font-weight: 700;
+    font-size: 0.8rem;
+  }
+</style>

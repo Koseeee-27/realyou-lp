@@ -1,0 +1,31 @@
+---
+// src/pages/index.astro — トップページ(/)
+//
+// 【React/Next との違い】
+// - src/pages/ 配下のファイル名がそのまま URL になる(ファイルベースルーティング)。
+//   index.astro = "/"。App Router の page.tsx + ディレクトリ規約より素朴。
+// - 各セクションを import して並べるだけ。これらは静的 HTML に変換され、
+//   ブラウザに JS は送られない(client:* を付けていないため)。
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import Problem from '../components/Problem.astro';
+import WhatWeMeasure from '../components/WhatWeMeasure.astro';
+import TechStack from '../components/TechStack.astro';
+import Results from '../components/Results.astro';
+import Roadmap from '../components/Roadmap.astro';
+import Footer from '../components/Footer.astro';
+
+const title = 'Real You 〜本当の私じゃだめですか？〜';
+const description =
+  'その診断、“理想の自分”で答えてない？ ゲーム中の無意識の行動から、本当の性格を5つの軸で診断する性格診断アプリ。';
+---
+
+<Base title={title} description={description}>
+  <Hero />
+  <Problem />
+  <WhatWeMeasure />
+  <TechStack />
+  <Results />
+  <Roadmap />
+  <Footer />
+</Base>
