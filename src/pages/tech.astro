@@ -1,0 +1,84 @@
+---
+// src/pages/tech.astro — 技術・開発ページ(/tech)。審査員・エンジニア向け。
+// 「どう作ったか・誰が作ったか」を見せる。製品の訴求は / 側。
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import TechStack from '../components/TechStack.astro';
+import Team from '../components/Team.astro';
+import Roadmap from '../components/Roadmap.astro';
+import Footer from '../components/Footer.astro';
+
+const title = '技術・開発 | Real You';
+const description =
+  'Real You を支える技術スタック・システム構成・開発チームと開発プロセスの紹介。';
+---
+
+<Base title={title} description={description}>
+  <Header current="tech" />
+
+  <!-- ページ導入 -->
+  <section class="section intro-section">
+    <div class="section__inner">
+      <h1 class="intro-title">
+        Real <span class="intro-y">You</span> の<br class="sp-only" />技術と開発
+      </h1>
+      <p class="intro-lead">
+        学生3人のチームで作った Real You を、<strong>どう作ったか・誰が作ったか</strong>の視点でまとめました。
+      </p>
+    </div>
+  </section>
+
+  <TechStack />
+  <Team />
+  <Roadmap />
+  <Footer />
+</Base>
+
+<style>
+  .intro-section {
+    padding-top: 2.5rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .intro-title {
+    font-size: clamp(2rem, 8vw, 3.2rem);
+    font-weight: 900;
+    line-height: 1.25;
+    margin-bottom: 1rem;
+  }
+
+  .intro-y {
+    background: var(--accent-yellow);
+    border: 3px solid var(--ink);
+    border-radius: 8px;
+    box-shadow: 3px 3px 0 var(--ink);
+    padding: 0 0.18em;
+    display: inline-block;
+    transform: rotate(-2deg);
+  }
+
+  .intro-lead {
+    font-weight: 700;
+    font-size: clamp(1rem, 4vw, 1.2rem);
+    color: var(--text-sub);
+    max-width: var(--max-content);
+  }
+
+  .intro-lead strong {
+    color: var(--ink);
+    background: var(--accent-yellow);
+    border-radius: 4px;
+    padding: 0 0.2em;
+  }
+
+  /* スマホでだけ改行を入れる(PCは1行) */
+  .sp-only {
+    display: inline;
+  }
+
+  @media (min-width: 600px) {
+    .sp-only {
+      display: none;
+    }
+  }
+</style>

@@ -1,39 +1,86 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="768" height="202" viewBox="0 0 768 202" font-family="'M PLUS Rounded 1c', system-ui, -apple-system, sans-serif">
-<text x="18" y="28" font-size="15" font-weight="800" fill="#000">インフラ構成 ＆ データの流れ</text>
-<line x1="160" y1="112.0" x2="206" y2="112.0" stroke="#000" stroke-width="3"/>
-<polygon points="206,106.0 206,118.0 215,112.0" fill="#000"/>
-<rect x="165.75" y="90.0" width="40.5" height="15" rx="3" fill="#fff"/>
-<text x="186.0" y="101.0" font-size="10.5" font-weight="700" fill="#444" text-anchor="middle">HTTPS</text>
-<line x1="358" y1="112.0" x2="404" y2="112.0" stroke="#000" stroke-width="3"/>
-<polygon points="404,106.0 404,118.0 413,112.0" fill="#000"/>
-<rect x="367.0" y="90.0" width="34.0" height="15" rx="3" fill="#fff"/>
-<text x="384.0" y="101.0" font-size="10.5" font-weight="700" fill="#444" text-anchor="middle">REST</text>
-<line x1="556" y1="112.0" x2="602" y2="112.0" stroke="#000" stroke-width="3"/>
-<polygon points="602,106.0 602,118.0 611,112.0" fill="#000"/>
-<rect x="568.25" y="90.0" width="27.5" height="15" rx="3" fill="#fff"/>
-<text x="582.0" y="101.0" font-size="10.5" font-weight="700" fill="#444" text-anchor="middle">SQL</text>
-<rect x="24" y="52" width="138" height="132" rx="16" fill="#000"/>
-<rect x="18" y="46" width="138" height="132" rx="16" fill="#fff" stroke="#000" stroke-width="4"/>
-<rect x="63.0" y="68" width="48" height="40" rx="6" fill="#fff" stroke="#000" stroke-width="3"/>
-<line x1="63.0" y1="80" x2="111.0" y2="80" stroke="#000" stroke-width="3"/>
-<circle cx="71.0" cy="74" r="2" fill="#000"/>
-<circle cx="79.0" cy="74" r="2" fill="#000"/>
-<circle cx="87.0" cy="74" r="2" fill="#000"/>
-<text x="87.0" y="138" font-size="19" font-weight="900" fill="#000" text-anchor="middle">ユーザー</text>
-<text x="87.0" y="160" font-size="12.5" font-weight="700" fill="#555" text-anchor="middle">スマホ / PC</text>
-<rect x="222" y="52" width="138" height="132" rx="16" fill="#000"/>
-<rect x="216" y="46" width="138" height="132" rx="16" fill="#fff" stroke="#000" stroke-width="4"/>
-<image x="263.0" y="68" width="44" height="44" href="data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjMDAwMDAwIiByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+VmVyY2VsPC90aXRsZT48cGF0aCBkPSJtMTIgMS42MDggMTIgMjAuNzg0SDBaIi8+PC9zdmc+"/>
-<text x="285.0" y="138" font-size="19" font-weight="900" fill="#000" text-anchor="middle">Vercel</text>
-<text x="285.0" y="160" font-size="12.5" font-weight="700" fill="#555" text-anchor="middle">Next.js / React</text>
-<rect x="420" y="52" width="138" height="132" rx="16" fill="#000"/>
-<rect x="414" y="46" width="138" height="132" rx="16" fill="#fff" stroke="#000" stroke-width="4"/>
-<image x="461.0" y="68" width="44" height="44" href="data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjMDAwMDAwIiByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+UmVuZGVyPC90aXRsZT48cGF0aCBkPSJNMTguMjYzLjAwN2MtMy4xMjEtLjE0Ny01Ljc0NCAyLjEwOS02LjE5MiA1LjA4Mi0uMDE4LjEzOC0uMDQ1LjI3Mi0uMDY3LjQwNS0uNjk2IDMuNzAzLTMuOTM2IDYuNTA3LTcuODI3IDYuNTA3LTEuMzg4IDAtMi42OTEtLjM1Ni0zLjgyNS0uOTc5YS4yMDI0LjIwMjQgMCAwIDAtLjMwMi4xNzhWMjRIMTJ2LTguOTk5YzAtMS42NTYgMS4zMzgtMyAyLjk4Ny0zaDIuOTg4YzMuMzgyIDAgNi4xMDMtMi44MTcgNS45Ny02LjI0NC0uMTItMy4wODQtMi42MS01LjYwMy01LjY4Mi01Ljc1Ii8+PC9zdmc+"/>
-<text x="483.0" y="138" font-size="19" font-weight="900" fill="#000" text-anchor="middle">Render</text>
-<text x="483.0" y="160" font-size="12.5" font-weight="700" fill="#555" text-anchor="middle">Express API</text>
-<rect x="618" y="52" width="138" height="132" rx="16" fill="#000"/>
-<rect x="612" y="46" width="138" height="132" rx="16" fill="#fff" stroke="#000" stroke-width="4"/>
-<image x="659.0" y="68" width="44" height="44" href="data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjM0ZDRjhFIiByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+U3VwYWJhc2U8L3RpdGxlPjxwYXRoIGQ9Ik0xMS45IDEuMDM2Yy0uMDE1LS45ODYtMS4yNi0xLjQxLTEuODc0LS42MzdMLjc2NCAxMi4wNUMtLjMzIDEzLjQyNy42NSAxNS40NTUgMi40MDkgMTUuNDU1aDkuNTc5bC4xMTMgNy41MWMuMDE0Ljk4NSAxLjI1OSAxLjQwOCAxLjg3My42MzZsOS4yNjItMTEuNjUzYzEuMDkzLTEuMzc1LjExMy0zLjQwMy0xLjY0NS0zLjQwM2gtOS42NDJ6Ii8+PC9zdmc+"/>
-<text x="681.0" y="138" font-size="19" font-weight="900" fill="#000" text-anchor="middle">Supabase</text>
-<text x="681.0" y="160" font-size="12.5" font-weight="700" fill="#2c8a63" text-anchor="middle">PostgreSQL</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="640" viewBox="0 0 720 640" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
+  <defs>
+    <pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse">
+      <circle cx="1.2" cy="1.2" r="1.2" fill="#e2e8f0"/>
+    </pattern>
+    <filter id="card-sh" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#0f172a" flood-opacity="0.12"/>
+    </filter>
+    <marker id="arrFlow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#334155"/>
+    </marker>
+    <marker id="arrDeploy" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="720" height="640" fill="#ffffff"/>
+  <rect x="0" y="0" width="720" height="640" fill="url(#dots)"/>
+
+  <text x="40" y="40" font-size="19" font-weight="800" fill="#0f172a">System Architecture</text>
+  <text x="680" y="40" text-anchor="end" font-size="11" font-family="ui-monospace, 'SF Mono', Menlo, monospace" fill="#94a3b8">Real You — infra &amp; data flow</text>
+
+  <!-- ===== 縦の双方向矢印 ＋ プロトコル ===== -->
+  <line x1="334" y1="188" x2="334" y2="224" stroke="#334155" stroke-width="2" marker-start="url(#arrFlow)" marker-end="url(#arrFlow)"/>
+  <text x="350" y="210" font-size="11" font-family="ui-monospace, 'SF Mono', Menlo, monospace" fill="#334155">HTTPS</text>
+  <line x1="334" y1="320" x2="334" y2="356" stroke="#334155" stroke-width="2" marker-start="url(#arrFlow)" marker-end="url(#arrFlow)"/>
+  <text x="350" y="342" font-size="11" font-family="ui-monospace, 'SF Mono', Menlo, monospace" fill="#334155">REST · JSON</text>
+  <line x1="334" y1="452" x2="334" y2="488" stroke="#334155" stroke-width="2" marker-start="url(#arrFlow)" marker-end="url(#arrFlow)"/>
+  <text x="350" y="474" font-size="11" font-family="ui-monospace, 'SF Mono', Menlo, monospace" fill="#334155">SQL</text>
+
+  <!-- ===== CI/CD 右サイドレール ===== -->
+  <path d="M556 314 C 532 300, 532 290, 520 280" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#arrDeploy)"/>
+  <path d="M556 330 C 532 344, 532 392, 520 404" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#arrDeploy)"/>
+  <rect x="556" y="290" width="140" height="64" rx="12" fill="#ffffff" stroke="#d0d7de" stroke-width="1.5" filter="url(#card-sh)"/>
+  <g transform="translate(572,306) scale(1.083)">
+    <path fill="#181717" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+  </g>
+  <text x="606" y="318" font-size="13" font-weight="700" fill="#0f172a">GitHub</text>
+  <text x="606" y="335" font-size="9.5" font-family="ui-monospace, 'SF Mono', Menlo, monospace" fill="#64748b">push → deploy</text>
+
+  <!-- ===== レイヤー帯 ===== -->
+  <!-- L1 CLIENT -->
+  <rect x="28" y="92" width="98" height="96" rx="10" fill="#64748b" fill-opacity="0.08" stroke="#64748b" stroke-opacity="0.4" stroke-width="1.4" stroke-dasharray="5 4"/>
+  <text x="77" y="144" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="1" font-family="ui-monospace, 'SF Mono', Menlo, monospace" fill="#64748b">CLIENT</text>
+  <rect x="148" y="92" width="372" height="96" rx="12" fill="#ffffff" stroke="#94a3b8" stroke-width="2" filter="url(#card-sh)"/>
+  <circle cx="198" cy="126" r="10" fill="#475569"/>
+  <path d="M180 156c0-9.9 8-18 18-18s18 8.1 18 18" fill="#475569"/>
+  <text x="244" y="134" font-size="18" font-weight="700" fill="#0f172a">ユーザー</text>
+  <text x="244" y="156" font-size="11" font-family="ui-monospace, 'SF Mono', Menlo, monospace" fill="#64748b">Web</text>
+
+  <!-- L2 FRONTEND -->
+  <rect x="28" y="224" width="98" height="96" rx="10" fill="#000000" fill-opacity="0.05" stroke="#0f172a" stroke-opacity="0.35" stroke-width="1.4" stroke-dasharray="5 4"/>
+  <text x="77" y="276" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="1" font-family="ui-monospace, 'SF Mono', Menlo, monospace" fill="#0f172a">FRONTEND</text>
+  <rect x="148" y="224" width="372" height="96" rx="12" fill="#ffffff" stroke="#0f172a" stroke-width="2" filter="url(#card-sh)"/>
+  <g transform="translate(182,254) scale(1.667)">
+    <path fill="#000000" d="m12 1.608 12 20.784H0Z"/>
+  </g>
+  <text x="244" y="266" font-size="18" font-weight="700" fill="#0f172a">Vercel</text>
+  <text x="244" y="288" font-size="11" font-family="ui-monospace, 'SF Mono', Menlo, monospace" fill="#64748b">Next.js · React</text>
+
+  <!-- L3 BACKEND -->
+  <rect x="28" y="356" width="98" height="96" rx="10" fill="#5847EB" fill-opacity="0.07" stroke="#5847EB" stroke-opacity="0.4" stroke-width="1.4" stroke-dasharray="5 4"/>
+  <text x="77" y="408" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="1" font-family="ui-monospace, 'SF Mono', Menlo, monospace" fill="#5847EB">BACKEND</text>
+  <rect x="148" y="356" width="372" height="96" rx="12" fill="#ffffff" stroke="#5847EB" stroke-width="2" filter="url(#card-sh)"/>
+  <g transform="translate(182,386) scale(1.667)">
+    <path fill="#5847EB" d="M18.263.007c-3.121-.147-5.744 2.109-6.192 5.082-.018.138-.045.272-.067.405-.696 3.703-3.936 6.507-7.827 6.507-1.388 0-2.691-.356-3.825-.979a.2024.2024 0 0 0-.302.178V24H12v-8.999c0-1.656 1.338-3 2.987-3h2.988c3.382 0 6.103-2.817 5.97-6.244-.12-3.084-2.61-5.603-5.682-5.75"/>
+  </g>
+  <text x="244" y="398" font-size="18" font-weight="700" fill="#0f172a">Render</text>
+  <text x="244" y="420" font-size="11" font-family="ui-monospace, 'SF Mono', Menlo, monospace" fill="#64748b">Express API</text>
+
+  <!-- L4 DATA -->
+  <rect x="28" y="488" width="98" height="96" rx="10" fill="#3FCF8E" fill-opacity="0.12" stroke="#3FCF8E" stroke-opacity="0.55" stroke-width="1.4" stroke-dasharray="5 4"/>
+  <text x="77" y="540" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="1" font-family="ui-monospace, 'SF Mono', Menlo, monospace" fill="#059669">DATA</text>
+  <rect x="148" y="488" width="372" height="96" rx="12" fill="#ffffff" stroke="#3FCF8E" stroke-width="2" filter="url(#card-sh)"/>
+  <g transform="translate(182,518) scale(1.667)">
+    <path fill="#3FCF8E" d="M11.9 1.036c-.015-.986-1.26-1.41-1.874-.637L.764 12.05C-.33 13.427.65 15.455 2.409 15.455h9.579l.113 7.51c.014.985 1.259 1.408 1.873.636l9.262-11.653c1.093-1.375.113-3.403-1.645-3.403h-9.642z"/>
+  </g>
+  <text x="244" y="530" font-size="18" font-weight="700" fill="#0f172a">Supabase</text>
+  <text x="244" y="552" font-size="11" font-family="ui-monospace, 'SF Mono', Menlo, monospace" fill="#64748b">PostgreSQL</text>
+
+  <!-- 凡例 -->
+  <line x1="40" y1="612" x2="70" y2="612" stroke="#334155" stroke-width="2" marker-start="url(#arrFlow)" marker-end="url(#arrFlow)"/>
+  <text x="78" y="616" font-size="10.5" font-family="ui-monospace, 'SF Mono', Menlo, monospace" fill="#64748b">データフロー</text>
+  <line x1="240" y1="612" x2="270" y2="612" stroke="#94a3b8" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#arrDeploy)"/>
+  <text x="278" y="616" font-size="10.5" font-family="ui-monospace, 'SF Mono', Menlo, monospace" fill="#64748b">CI/CD 自動デプロイ</text>
 </svg>

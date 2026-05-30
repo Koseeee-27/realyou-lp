@@ -3,9 +3,9 @@
 技育博 vol.1 の展示で使う、Real You の紹介・技術ショーケースサイト。
 QR から着地 → CTA でアプリ本編へ誘導する 1 ページの静的サイト。
 
+- 公開サイト: https://realyou-lp.pages.dev/
 - アプリ本編（最新デプロイ）: https://realyou-jp.vercel.app/
 - アプリ本編リポジトリ: https://github.com/Koseeee-27/real-you
-- 仕様書・デプロイ手順: KC3 の Notion ドキュメント（チーム内で管理）
 
 ## 技術構成
 

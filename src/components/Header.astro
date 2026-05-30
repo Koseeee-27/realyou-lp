@@ -1,8 +1,19 @@
 ---
-// サイトヘッダー — ロゴ(ブランドマーク)の定位置。
-// Hero に小さく置くと浮いて見えたため、画面上部の細いバーに移設。
-// 右側に GitHub と CTA を置き、常に「診断する」導線を残す。
-import { APP_URL, LINKS } from '../config';
+// サイトヘッダー — テキストロゴ + ページ間リンク + CTA。
+// current でページを判定し、もう一方のページへの導線を出す
+//   home → 「技術・開発 →」(/tech)
+//   tech → 「← プロダクト」(/)
+import { APP_URL } from '../config';
+
+interface Props {
+  current?: 'home' | 'tech';
+}
+const { current = 'home' } = Astro.props;
+
+const cross =
+  current === 'home'
+    ? { href: '/tech', label: '技術・開発 →' }
+    : { href: '/', label: '← プロダクト' };
 ---
 
 <header class="site-header">
@@ -12,9 +23,7 @@ import { APP_URL, LINKS } from '../config';
     </a>
 
     <nav class="nav">
-      <a class="nav-link" href={LINKS.github} target="_blank" rel="noopener noreferrer">
-        GitHub
-      </a>
+      <a class="nav-link" href={cross.href}>{cross.label}</a>
       <a class="nav-cta" href={APP_URL} target="_blank" rel="noopener noreferrer">
         診断する
       </a>
@@ -51,6 +60,11 @@ import { APP_URL, LINKS } from '../config';
     letter-spacing: 0.01em;
     color: var(--ink);
     text-decoration: none;
+    transition: opacity 0.15s ease;
+  }
+
+  .brand:hover {
+    opacity: 0.8;
   }
 
   /* "You" を黄色マーカーで強調してブランドのアクセントに */
@@ -73,10 +87,12 @@ import { APP_URL, LINKS } from '../config';
     font-size: 0.9rem;
     text-decoration: none;
     color: var(--ink);
+    transition: opacity 0.15s ease;
   }
 
+  /* ホバーで少し薄く */
   .nav-link:hover {
-    text-decoration: underline;
+    opacity: 0.55;
   }
 
   .nav-cta {
@@ -89,7 +105,11 @@ import { APP_URL, LINKS } from '../config';
     border-radius: 999px;
     box-shadow: 3px 3px 0 var(--ink);
     padding: 0.35rem 1rem;
-    transition: transform 0.08s ease, box-shadow 0.08s ease;
+    transition: opacity 0.15s ease, transform 0.08s ease, box-shadow 0.08s ease;
+  }
+
+  .nav-cta:hover {
+    opacity: 0.85;
   }
 
   .nav-cta:active {

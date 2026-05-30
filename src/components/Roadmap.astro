@@ -1,81 +1,65 @@
 ---
-// 4-6. 今後の展望 — 軽いトーンで 3 つ
+// 今後の展望 — ポップさを抑え、シンプルな箇条リストでまとめる。
 const ITEMS = [
-  {
-    title: 'ゲームの追加',
-    body: '色々なシチュエーションのゲームを増やして、多角的に診断。',
-  },
-  {
-    title: '診断ロジックの精度向上',
-    body: '行動データからもっと正確に性格を導けるよう進化中。',
-  },
-  {
-    title: 'データ蓄積でもっと面白く',
-    body: 'ユーザーが増えるほど「みんなとの違い」の比較が充実。',
-  },
+  { title: 'ゲームの追加', body: '様々なシチュエーションのゲームを増やし、多角的に診断する。' },
+  { title: '診断ロジックの精度向上', body: '行動データからより正確に性格を導けるよう改善する。' },
+  { title: 'データ蓄積による比較の充実', body: 'ユーザーが増えるほど「みんなとの違い」を見せられるようにする。' },
 ] as const;
 ---
 
 <section class="section">
-  <div class="section__inner section__inner--wide">
-  <h2 class="section-title"><span class="marker">今後の展望</span></h2>
+  <div class="section__inner">
+    <h2 class="section-title"><span class="marker">今後の展望</span></h2>
 
-  <ol class="roadmap">
-    {
-      ITEMS.map((item, i) => (
-        <li class="item card">
-          <span class="num">{String(i + 1).padStart(2, '0')}</span>
-          <div>
-            <h3 class="item-title">{item.title}</h3>
-            <p class="item-body">{item.body}</p>
-          </div>
-        </li>
-      ))
-    }
-  </ol>
+    <ul class="list">
+      {
+        ITEMS.map((item) => (
+          <li class="item">
+            <span class="item-title">{item.title}</span>
+            <span class="item-body">{item.body}</span>
+          </li>
+        ))
+      }
+    </ul>
   </div>
 </section>
 
 <style>
-  .roadmap {
+  .list {
     list-style: none;
     margin: 0;
     padding: 0;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
+    border-top: 2px solid var(--ink);
   }
 
   .item {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-  }
-
-  .num {
-    font-size: 2.6rem;
-    font-weight: 900;
-    line-height: 1;
-    flex-shrink: 0;
-    color: var(--accent-red);
-    font-variant-numeric: tabular-nums;
-  }
-
-  @media (min-width: 720px) {
-    .roadmap {
-      grid-template-columns: repeat(3, 1fr);
-    }
+    gap: 0.2rem;
+    padding: 1rem 0;
+    border-bottom: 2px solid var(--ink);
   }
 
   .item-title {
-    font-size: 1.2rem;
-    margin-bottom: 0.3rem;
+    font-weight: 900;
+    font-size: 1.1rem;
   }
 
   .item-body {
     color: var(--text-sub);
     font-weight: 700;
-    font-size: 0.95rem;
+    font-size: 0.92rem;
+  }
+
+  @media (min-width: 720px) {
+    .item {
+      flex-direction: row;
+      align-items: baseline;
+      gap: 1.5rem;
+    }
+
+    .item-title {
+      flex: 0 0 14rem;
+    }
   }
 </style>

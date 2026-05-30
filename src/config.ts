@@ -89,3 +89,101 @@ export const TECH_STACK: { layer: string; items: TechItem[] }[] = [
     ],
   },
 ];
+
+/** チームメンバー(docs/lp-spec.md「メンバー紹介」準拠)。
+ *  - name は表示名(ニックネーム)。個人名(姓)は出さない。
+ *  - icon は public/members/<icon>（技育博メンバーは作成アイコン、KC3組は GitHub アバターをローカル化）。
+ *  - github / x / links / comment は未記入(undefined)なら表示しない。 */
+export interface Member {
+  id: string;
+  name: string;
+  role: string;
+  icon: string;
+  github?: string;
+  x?: string;
+  links?: { label: string; url: string }[];
+  comment?: string;
+}
+
+export const MEMBER_GROUPS: { group: string; note?: string; members: Member[] }[] = [
+  {
+    group: '技育博メンバー',
+    members: [
+      {
+        id: 'kose',
+        name: 'こーせー',
+        role: 'リーダー / フロントエンド / 設計',
+        icon: 'kose.png',
+        // spec は github.com/Koseeee だが 404。実在する Koseeee-27 を使用
+        github: 'https://github.com/Koseeee-27',
+        x: 'https://x.com/k_k277474',
+        links: [
+          {
+            label: 'ポートフォリオ',
+            url: 'https://porfolio-kosei.notion.site/Portfolio-353a8572e3bc805b8e54d9bc2acb2802',
+          },
+        ],
+        comment: 'フロントエンド！！！',
+      },
+      {
+        id: 'ryusei',
+        name: 'りーせ',
+        role: 'バックエンド',
+        icon: 'ryusei.jpg',
+        github: 'https://github.com/ru-se',
+        x: 'https://x.com/ri_se_yu',
+        comment:
+          '僕自身MBTIは一切信用してないです！そこからこの企画が生まれました！！！',
+      },
+      {
+        id: 'ogue',
+        name: 'おぐー',
+        role: 'デザイン / フロントエンド / MBTI キャラクターイラスト',
+        icon: 'ogue.jpg',
+        github: 'https://github.com/nightstar039',
+        x: 'https://x.com/link_38_ha',
+        comment:
+          '創作大好き！！',
+      },
+    ],
+  },
+  {
+    group: 'KC3Hack メンバー',
+    note: '技育博には参加していませんが、KC3Hack で開発に貢献したメンバー',
+    members: [
+      {
+        id: 'tamacha',
+        name: 'たまちゃ',
+        role: 'デザイン / FE / BE / 診断ロジック（KC3Hack 時）',
+        icon: 'tamacha.jpg',
+        github: 'https://github.com/tamtya',
+      },
+      {
+        id: 'michika',
+        name: 'みちか',
+        role: 'FE / デモ動画（KC3Hack 時）',
+        icon: 'michika.png',
+        github: 'https://github.com/mimiyako3',
+      },
+    ],
+  },
+];
+
+/** 開発プロセス・ツール。CI/CD は連絡ツールと混ぜず「開発・デプロイ」側に置く。 */
+export const DEV_TOOLS = [
+  {
+    group: '開発・デプロイ',
+    items: [
+      { name: 'GitHub', desc: 'バージョン管理・PR レビュー' },
+      { name: 'CI/CD', desc: 'push ごとに自動ビルド・型チェック' },
+    ],
+  },
+  {
+    group: 'コミュニケーション・管理',
+    items: [
+      { name: 'Notion', desc: 'ドキュメント・タスク管理' },
+      { name: 'Figma / FigJam', desc: 'UI デザイン・ブレスト' },
+      { name: 'Discord', desc: 'チーム連絡' },
+    ],
+  },
+] as const;

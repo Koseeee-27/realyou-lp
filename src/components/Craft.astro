@@ -1,0 +1,120 @@
+---
+// つくりへのこだわり(プロダクトページ・概要) — FE/BE 2カード + /tech への導線。
+// 展示でのプロダクト説明の補助。詳細は技術・開発ページ(/tech)に委ねる。
+const CRAFTS = [
+  {
+    tag: 'Frontend',
+    accent: 'var(--accent-blue)',
+    title: '“診断”を“体験”に。',
+    body:
+      '新ブルータリズムの世界観と、つい夢中になるゲームの手触り。構えさせないことで、本音の行動を自然に引き出します。',
+  },
+  {
+    tag: 'Backend',
+    accent: 'var(--accent-red)',
+    title: '行動を、数字に。',
+    body:
+      'フロントが捉えた無意識の行動データを、独自の 5 軸ロジックでスコア化。自己申告とのギャップを可視化します。',
+  },
+] as const;
+---
+
+<section class="section" id="craft">
+  <div class="section__inner section__inner--wide">
+    <h2 class="section-title"><span class="marker">つくりへのこだわり</span></h2>
+
+    <ul class="crafts">
+      {
+        CRAFTS.map((c) => (
+          <li class="craft" style={`--craft-accent: ${c.accent}`}>
+            <span class="craft-tag">{c.tag}</span>
+            <h3 class="craft-title">{c.title}</h3>
+            <p class="craft-body">{c.body}</p>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="more">
+      <a class="more-btn" href="/tech">技術・開発の詳細を見る →</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .crafts {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .craft {
+    background: var(--card);
+    border: var(--border);
+    border-top: 12px solid var(--craft-accent);
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+    padding: 1.5rem 1.6rem;
+  }
+
+  .craft-tag {
+    display: inline-block;
+    font-weight: 900;
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    color: #fff;
+    background: var(--craft-accent);
+    border: 2.5px solid var(--ink);
+    border-radius: 999px;
+    padding: 0.15rem 0.85rem;
+  }
+
+  .craft-title {
+    font-size: clamp(1.35rem, 5vw, 1.7rem);
+    margin: 0.7rem 0 0.5rem;
+  }
+
+  .craft-body {
+    color: var(--text-sub);
+    font-weight: 700;
+    font-size: 0.98rem;
+  }
+
+  .more {
+    text-align: center;
+    margin-top: 2rem;
+  }
+
+  .more-btn {
+    display: inline-block;
+    font-weight: 900;
+    font-size: 1.1rem;
+    text-decoration: none;
+    color: #fff;
+    background: #141414;
+    border: var(--border);
+    border-radius: 999px;
+    box-shadow: var(--shadow);
+    padding: 0.85rem 2rem;
+    transition: opacity 0.15s ease, transform 0.08s ease, box-shadow 0.08s ease;
+  }
+
+  .more-btn:hover {
+    opacity: 0.8;
+  }
+
+  .more-btn:active {
+    transform: translate(4px, 4px);
+    box-shadow: 2px 2px 0 var(--ink);
+  }
+
+  @media (min-width: 720px) {
+    .crafts {
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+  }
+</style>

@@ -1,11 +1,16 @@
 ---
-// 4-1. Hero — 方向A「ギャップを主役に」
-// プロダクトの核「自認 vs 実測のギャップ」を Hero のメインビジュアルとして見せる。
-// ロゴ画像に名前+タグラインが入っているため、テキストでの再掲はしない(重複解消)。
+// Hero — 方向A「ギャップを主役」+ 1画面に意味を詰める3ブロック構成。
+//   上: キッカー(小バッジ) / 中: 課題定義(見出し+≠+リード+CTA) / 下: セクション遷移ナビ+技術ページ+スクロール誘導
 import { APP_URL } from '../config';
 ---
 
 <header class="hero">
+  <!-- 上: キッカー -->
+  <div class="kicker">
+    <span class="kicker-badge"><span class="kicker-dot"></span>ゲームで暴く、本当の性格</span>
+  </div>
+
+  <!-- 中: 課題定義(メイン) -->
   <div class="inner">
     <h1 class="hook">
       その性格診断、<br />
@@ -13,7 +18,6 @@ import { APP_URL } from '../config';
       答えてない？
     </h1>
 
-    <!-- ギャップのメインビジュアル: 思う自分 ≠ 行動が示す自分 -->
     <div class="gap" aria-hidden="false">
       <div class="gap-card is-ideal">
         <span class="gap-label">あなたが思う、あなた</span>
@@ -29,28 +33,75 @@ import { APP_URL } from '../config';
     </div>
 
     <p class="lead">
-      ゲーム中の<strong>“無意識の行動”</strong>を計測して、<br />
-      そのズレを暴く性格診断。
+      ゲーム中の<strong>“無意識の行動”</strong>を計測して、そのズレを暴く性格診断。
     </p>
 
     <a class="cta" href={APP_URL} target="_blank" rel="noopener noreferrer">
       無料で診断する →
     </a>
   </div>
+
+  <!-- 下: 遷移ナビ -->
+  <div class="hero-bottom">
+    <nav class="jump" aria-label="セクションへ移動">
+      <a class="jump-chip" href="#problem">課題</a>
+      <a class="jump-chip" href="#measure">何を測る</a>
+      <a class="jump-chip" href="#results">結果</a>
+      <a class="jump-tech" href="/tech">技術・開発 →</a>
+    </nav>
+    <span class="scroll-hint" aria-hidden="true">
+      スクロールで詳しく <span class="arrow">↓</span>
+    </span>
+  </div>
 </header>
 
 <style>
   .hero {
-    /* 横回転カードのはみ出しを抑える */
     overflow: hidden;
-    padding: 2.5rem 0 3rem;
+    padding: 1.75rem 0 2.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
   }
 
-  /*
-   * モバイル: 1 カラムでセンター寄せ(従来どおり)。
-   * DOM 順は hook → gap → lead → cta。単純な grid 縦積みで表示する。
-   */
+  /* 上下ブロックも中央コンテナ幅に揃える */
+  .kicker,
+  .hero-bottom {
+    width: 100%;
+    max-width: var(--max-wide);
+    margin: 0 auto;
+    padding: 0 var(--space);
+  }
+
+  /* --- キッカー --- */
+  .kicker {
+    text-align: center;
+  }
+
+  .kicker-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 900;
+    font-size: 0.9rem;
+    background: #fff;
+    border: 3px solid var(--ink);
+    border-radius: 999px;
+    box-shadow: 3px 3px 0 var(--ink);
+    padding: 0.4rem 1.05rem;
+  }
+
+  .kicker-dot {
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 50%;
+    background: var(--accent-red);
+    border: 2px solid var(--ink);
+  }
+
+  /* --- 中: メイン --- */
   .inner {
+    width: 100%;
     max-width: var(--max-wide);
     margin: 0 auto;
     padding: 0 var(--space);
@@ -72,7 +123,6 @@ import { APP_URL } from '../config';
     border-radius: 8px;
     box-shadow: 3px 3px 0 var(--ink);
     padding: 0 0.2em;
-    /* 傾けて手書きラベル風に */
     display: inline-block;
     transform: rotate(-2deg);
   }
@@ -111,14 +161,12 @@ import { APP_URL } from '../config';
     opacity: 0.65;
   }
 
-  /* 思う自分: 明るい・理想 */
   .is-ideal {
     background: #fff;
     color: var(--ink);
     transform: rotate(-2deg);
   }
 
-  /* 行動が示す自分: ダーク・本性 */
   .is-real {
     background: #141414;
     color: #fff;
@@ -129,7 +177,6 @@ import { APP_URL } from '../config';
     color: var(--accent-red);
   }
 
-  /* 中央の ≠ バッジ(ズレの記号)。視認性優先で大きく・回転なし・高コントラスト */
   .gap-badge {
     position: relative;
     z-index: 2;
@@ -144,13 +191,11 @@ import { APP_URL } from '../config';
     box-shadow: 4px 4px 0 var(--ink);
   }
 
-  /* ≠ グリフは細く見えがちなので、太字 + 大きめ + 白で明確に */
   .gap-badge-mark {
     font-size: 2.4rem;
     font-weight: 900;
     line-height: 1;
     color: #fff;
-    /* 黒フチでさらにくっきり */
     text-shadow:
       -1.5px -1.5px 0 var(--ink),
       1.5px -1.5px 0 var(--ink),
@@ -172,75 +217,200 @@ import { APP_URL } from '../config';
     padding: 0 0.2em;
   }
 
+  /* --- 下: 遷移ナビ --- */
+  .hero-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .jump {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
+    width: 100%;
+  }
+
+  .jump-chip,
+  .jump-tech {
+    font-weight: 900;
+    font-size: 1rem;
+    text-decoration: none;
+    color: var(--ink);
+    border: 3px solid var(--ink);
+    border-radius: 999px;
+    padding: 0.65rem 1.5rem;
+    box-shadow: 4px 4px 0 var(--ink);
+    transition: opacity 0.15s ease, transform 0.08s ease, box-shadow 0.08s ease;
+  }
+
+  .jump-chip {
+    background: #fff;
+  }
+
+  /* 技術ページへの遷移はダーク pill で「別ページ」感を出す */
+  .jump-tech {
+    background: #141414;
+    color: #fff;
+  }
+
+  .jump-chip:hover,
+  .jump-tech:hover {
+    opacity: 0.75;
+  }
+
+  .jump-chip:active,
+  .jump-tech:active {
+    transform: translate(3px, 3px);
+    box-shadow: 0 0 0 var(--ink);
+  }
+
+  .scroll-hint {
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: var(--text-sub);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .scroll-hint .arrow {
+    display: inline-block;
+    animation: bob 1.4s ease-in-out infinite;
+  }
+
+  @keyframes bob {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(3px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-hint .arrow {
+      animation: none;
+    }
+  }
+
   /*
-   * PC(≥860px): 横幅を活かした 2 カラム。
-   * 左 = コピー(ロゴ→見出し→リード→CTA)、右 = ギャップ・ビジュアル。
-   * grid-template-areas で DOM 順を変えずに再配置する。gap は同名エリアを
-   * 全行に置くことで右カラムを縦に貫く(= 左の4要素ぶんの高さを占める)。
+   * PC(≥860px): ウィンドウ高に合わせた 1 画面。
+   *   上=キッカー / 中=メイン(伸びて縦中央) / 下=遷移ナビ で余白を埋める。
    */
   @media (min-width: 860px) {
     .hero {
-      padding: 4.5rem 0 5rem;
+      min-height: calc(100vh - 56px);
+      min-height: calc(100svh - 56px);
+      padding: 1.5rem 0;
+      gap: 1.5rem;
     }
 
+    /* PC では横幅をもっと使う(余白を圧縮) */
+    .kicker,
+    .inner,
+    .hero-bottom {
+      max-width: 1200px;
+    }
+
+    .kicker {
+      text-align: left;
+    }
+
+    .kicker-badge {
+      font-size: 1rem;
+      padding: 0.5rem 1.2rem;
+    }
+
+    /* メインが残り空間いっぱいに伸び、その中で縦中央 */
     .inner {
-      max-width: 1080px;
+      flex: 1;
+      align-content: center;
       grid-template-columns: 1.05fr 0.95fr;
       grid-template-areas:
         'hook gap'
         'lead gap'
         'cta  gap';
       align-items: center;
-      column-gap: 3.5rem;
+      column-gap: 4rem;
       justify-items: start;
       text-align: left;
     }
 
     .hook {
       grid-area: hook;
-      font-size: clamp(2.6rem, 4.2vw, 3.8rem);
-      margin-bottom: 1.75rem;
+      font-size: clamp(3rem, 5vw, 4.6rem);
+      margin-bottom: 2rem;
     }
 
     .lead {
       grid-area: lead;
-      font-size: 1.2rem;
-      margin-bottom: 2.25rem;
+      font-size: 1.35rem;
+      margin-bottom: 2.5rem;
     }
 
     .cta {
       grid-area: cta;
       justify-self: start;
-      font-size: 1.35rem;
-      padding: 1rem 2.5rem;
+      font-size: 1.5rem;
+      padding: 1.1rem 2.8rem;
     }
 
-    /* 右カラムのギャップ・ビジュアルを大きく見せる */
     .gap {
       grid-area: gap;
       margin: 0;
-      max-width: 440px;
+      max-width: 520px;
       justify-self: center;
-      gap: 0.75rem;
+      gap: 0.85rem;
     }
 
     .gap-card {
-      padding: 1.6rem 1.9rem;
+      padding: 2rem 2.2rem;
     }
 
     .gap-label {
-      font-size: 1.6rem;
+      font-size: 1.85rem;
     }
 
     .gap-sub {
-      font-size: 0.9rem;
+      font-size: 1rem;
     }
 
     .gap-badge {
-      width: 3.8rem;
-      height: 3.8rem;
-      margin: -0.6rem 0;
-      font-size: 2.2rem;
+      width: 4.4rem;
+      height: 4.4rem;
+      margin: -0.7rem 0;
+    }
+
+    .gap-badge-mark {
+      font-size: 2.8rem;
+    }
+
+    /* 下部ナビは横一列: 左=セクション / 右=スクロール誘導。ボタンも大きく */
+    .hero-bottom {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .jump {
+      width: auto;
+      justify-content: flex-start;
+      gap: 0.8rem;
+    }
+
+    .jump-chip,
+    .jump-tech {
+      font-size: 1.15rem;
+      padding: 0.8rem 1.8rem;
+      box-shadow: 5px 5px 0 var(--ink);
+    }
+
+    .scroll-hint {
+      font-size: 0.95rem;
     }
   }
 </style>
