@@ -68,6 +68,9 @@ h3 {
 
 p {
   margin: 0;
+  /* 日本語を文節単位で折り返し、語の途中で切れないようにする(禁則処理つき) */
+  line-break: strict;
+  word-break: auto-phrase;
 }
 
 img {
@@ -86,6 +89,8 @@ a {
  * これで背景を全幅で塗り分けつつ、コンテンツ幅をセクションごとに選べる(P1/P2)。 */
 .section {
   padding: 3.25rem 0;
+  /* アンカーで飛んだとき sticky ヘッダーに隠れないように余白 */
+  scroll-margin-top: 70px;
 }
 
 .section__inner {
@@ -158,7 +163,12 @@ a {
   border-radius: 999px;
   padding: 0.9rem 2rem;
   box-shadow: var(--shadow);
-  transition: transform 0.08s ease, box-shadow 0.08s ease;
+  transition: opacity 0.15s ease, transform 0.08s ease, box-shadow 0.08s ease;
+}
+
+/* ホバーで色が少し薄くなるシンプルな反応 */
+.cta:hover {
+  opacity: 0.82;
 }
 
 .cta:active {

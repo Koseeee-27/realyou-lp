@@ -1,0 +1,259 @@
+---
+// 開発体制セクション(技術ページ用) — メンバー紹介(spec 準拠) + 開発プロセス・ツール。
+// 個人名(姓)は出さず表示名のみ。GitHub/X/その他/コメントは未記入なら非表示。
+import { MEMBER_GROUPS, DEV_TOOLS } from '../config';
+---
+
+<section class="section section--white section--roomy">
+  <div class="section__inner section__inner--wide">
+    <h2 class="section-title"><span class="marker">開発体制</span></h2>
+
+    <!-- メンバー -->
+    <h3 class="block-title">メンバー</h3>
+    {
+      MEMBER_GROUPS.map((g) => (
+        <div class="group">
+          <div class="group-head">
+            <h4 class="group-name">{g.group}</h4>
+            {g.note && <span class="group-note">{g.note}</span>}
+          </div>
+          <ul class="members">
+            {g.members.map((m) => (
+              <li class="member">
+                <img
+                  class="avatar"
+                  src={`/members/${m.icon}`}
+                  alt={`${m.name} のアイコン`}
+                  width="72"
+                  height="72"
+                  loading="lazy"
+                />
+                <div class="member-body">
+                  <span class="member-name">{m.name}</span>
+                  <span class="member-role">{m.role}</span>
+                  {m.comment && <p class="member-comment">{m.comment}</p>}
+                  {(m.github || m.x || m.links) && (
+                    <div class="member-links">
+                      {m.github && (
+                        <a href={m.github} target="_blank" rel="noopener noreferrer">
+                          GitHub
+                        </a>
+                      )}
+                      {m.x && (
+                        <a href={m.x} target="_blank" rel="noopener noreferrer">
+                          X
+                        </a>
+                      )}
+                      {m.links?.map((l) => (
+                        <a href={l.url} target="_blank" rel="noopener noreferrer">
+                          {l.label}
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+
+    <!-- 開発プロセス・ツール -->
+    <h3 class="block-title tools-title">開発プロセス・ツール</h3>
+    <div class="tools">
+      {
+        DEV_TOOLS.map((g) => (
+          <div class="tool-group">
+            <h4 class="tool-group-name">{g.group}</h4>
+            <ul class="tool-list">
+              {g.items.map((t) => (
+                <li class="tool">
+                  <span class="tool-name">{t.name}</span>
+                  <span class="tool-desc">{t.desc}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .block-title {
+    font-size: clamp(1.3rem, 4vw, 1.6rem);
+    font-weight: 900;
+    margin: 0 0 1.25rem;
+  }
+
+  .tools-title {
+    margin-top: 2.75rem;
+  }
+
+  /* --- メンバー --- */
+  .group {
+    margin-bottom: 1.75rem;
+  }
+
+  .group-head {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.5rem 0.9rem;
+    margin-bottom: 0.9rem;
+  }
+
+  .group-name {
+    font-size: 1.05rem;
+    font-weight: 900;
+    background: var(--accent-yellow);
+    border: 3px solid var(--ink);
+    border-radius: 999px;
+    padding: 0.2rem 0.9rem;
+  }
+
+  .group-note {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--text-sub);
+  }
+
+  .members {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .member {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--cream);
+    border: var(--border);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    padding: 1rem 1.1rem;
+  }
+
+  .avatar {
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0;
+    object-fit: cover;
+    border: 3px solid var(--ink);
+    border-radius: 12px;
+    background: #fff;
+  }
+
+  .member-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    min-width: 0;
+  }
+
+  .member-name {
+    font-weight: 900;
+    font-size: 1.1rem;
+  }
+
+  .member-role {
+    font-weight: 900;
+    font-size: 0.82rem;
+    color: var(--accent-red);
+  }
+
+  .member-comment {
+    color: var(--text-sub);
+    font-weight: 700;
+    font-size: 0.85rem;
+    margin-top: 0.2rem;
+  }
+
+  .member-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.5rem;
+  }
+
+  .member-links a {
+    font-weight: 900;
+    font-size: 0.75rem;
+    text-decoration: none;
+    color: var(--ink);
+    background: #fff;
+    border: 2.5px solid var(--ink);
+    border-radius: 999px;
+    padding: 0.15rem 0.7rem;
+    transition: opacity 0.15s ease;
+  }
+
+  .member-links a:hover {
+    opacity: 0.65;
+  }
+
+  /* --- ツール --- */
+  .tools {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .tool-group-name {
+    font-size: 1rem;
+    font-weight: 900;
+    margin: 0 0 0.75rem;
+    padding-bottom: 0.2rem;
+    border-bottom: 3px dashed var(--ink);
+    display: inline-block;
+  }
+
+  .tool-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .tool {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+
+  .tool-name {
+    font-weight: 900;
+    font-size: 0.98rem;
+  }
+
+  .tool-desc {
+    color: var(--text-sub);
+    font-weight: 700;
+    font-size: 0.82rem;
+  }
+
+  @media (min-width: 720px) {
+    .members {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .member {
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    .tools {
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+  }
+</style>

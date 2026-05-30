@@ -1,51 +1,80 @@
 ---
-// 4-5. 結果の可視化 — 結果画面スクショ(自認 vs 実測レーダー、平均比較バー)
-// スクショ未用意のためプレースホルダ。public/ に置いて配列を埋めれば差し替わる。
-
+// 結果の可視化 — スクショ2枚を2カラム + 注釈3カード(spec §4.1 ベース、余白を圧縮)。
+// コア訴求: 自己申告 ▼ vs 行動から出た実測 ▼ を同じバーで並べてズレを見せる。
 interface Shot {
   src: string;
   alt: string;
   caption: string;
 }
 
-// スクショができたら src を実ファイルに差し替える(例: '/result-radar.png')
 const SHOTS: Shot[] = [
-  { src: '', alt: '自認 vs 実測のレーダーチャート', caption: '自認 vs 実測のレーダーチャート' },
-  { src: '', alt: '全ユーザー平均との比較バーチャート', caption: '全ユーザー平均との比較' },
+  {
+    src: '/results/summary.png',
+    alt: '結果サマリー画面。5 軸ごとに自己申告と行動から出た実測を対比バーで並べ、ズレを表示',
+    caption: '結果サマリー（自己申告 ▼ vs 実測 ▼）',
+  },
+  {
+    src: '/results/game-detail.png',
+    alt: 'ゲーム別の詳細画面。各ゲームの行動データと、それが各軸スコアへどう寄与したかを表示',
+    caption: 'ゲーム別の詳細（さらに深掘り）',
+  },
 ];
+
+const NOTES = [
+  {
+    n: '01',
+    title: 'キャラ名で一目でわかる',
+    body: '5 軸の結果を「無敵のポーカーフェイス」など覚えやすいキャラ名に。シェアしたくなる結果に。',
+  },
+  {
+    n: '02',
+    title: '自己認識のズレを数値化',
+    body: '自己申告と、行動から出た実測の一致度を % で表示。ギャップが大きいほど発見がある。',
+  },
+  {
+    n: '03',
+    title: '盛れない行動エビデンス',
+    body: '「機械が止まった 3 秒間、クリック 0 回（平均 3 回）」のように、無意識の行動データが結果の根拠。',
+  },
+] as const;
 ---
 
-<section class="section section--cream section--roomy">
+<section class="section section--cream" id="results">
   <div class="section__inner section__inner--wide">
-  <h2 class="section-title"><span class="marker">結果の可視化</span></h2>
+    <h2 class="section-title"><span class="marker">結果の可視化</span></h2>
 
-  <div class="card lead-card">
-    <p>
-      診断の結果は、<strong>「自分が思う自分」</strong>と
-      <strong>「行動が示す自分」</strong>のギャップで見せます。
-    </p>
-  </div>
+    <div class="card lead-card">
+      <p>
+        診断の結果は、<strong>「自分が思う自分」</strong>と<strong>「行動が示す自分」</strong>のギャップで見せます。
+      </p>
+    </div>
 
-  <div class="shots">
-    {
-      SHOTS.map((shot) => (
-        <figure class="shot">
-          {shot.src ? (
-            <img src={shot.src} alt={shot.alt} class="shot-img" />
-          ) : (
-            <div class="placeholder">
-              <div>
-                {shot.caption}
-                <br />
-                <small>本編から撮影 → public/ に配置で差し替え</small>
-              </div>
-            </div>
-          )}
-          <figcaption class="shot-caption">{shot.caption}</figcaption>
-        </figure>
-      ))
-    }
-  </div>
+    <!-- スクショ2枚を2カラム -->
+    <ul class="shots">
+      {
+        SHOTS.map((shot) => (
+          <li>
+            <figure class="shot">
+              <img src={shot.src} alt={shot.alt} loading="lazy" />
+              <figcaption class="shot-caption">{shot.caption}</figcaption>
+            </figure>
+          </li>
+        ))
+      }
+    </ul>
+
+    <!-- 注釈3カード -->
+    <ul class="notes">
+      {
+        NOTES.map((note) => (
+          <li class="note">
+            <span class="note-no">{note.n}</span>
+            <h3 class="note-title">{note.title}</h3>
+            <p class="note-body">{note.body}</p>
+          </li>
+        ))
+      }
+    </ul>
   </div>
 </section>
 
@@ -54,45 +83,90 @@ const SHOTS: Shot[] = [
     max-width: var(--max-content);
     font-size: clamp(1.1rem, 4.5vw, 1.4rem);
     font-weight: 700;
-    margin-bottom: 2.25rem;
+    margin-bottom: 1.75rem;
   }
 
   .lead-card strong {
     color: var(--accent-pink);
   }
 
+  /* スクショ: モバイル1列 → PC 2カラム */
   .shots {
+    list-style: none;
+    margin: 0 0 2rem;
+    padding: 0;
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-
-  @media (min-width: 720px) {
-    .shots {
-      grid-template-columns: 1fr 1fr;
-    }
+    gap: 1.25rem;
   }
 
   .shot {
     margin: 0;
   }
 
-  .shot-img {
+  .shot img {
     width: 100%;
+    height: auto;
     border: var(--border-thick);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
+    background: #fff;
   }
 
   .shot-caption {
     text-align: center;
     font-weight: 900;
-    margin-top: 0.75rem;
+    font-size: 0.9rem;
     color: var(--text-sub);
+    margin-top: 0.7rem;
   }
 
-  .placeholder small {
+  /* 注釈3カード */
+  .notes {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .note {
+    background: var(--card);
+    border: var(--border);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    padding: 1.2rem 1.3rem;
+  }
+
+  .note-no {
+    font-size: 1.9rem;
+    font-weight: 900;
+    line-height: 1;
+    color: var(--accent-pink);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .note-title {
+    font-size: 1.1rem;
+    margin: 0.35rem 0 0.35rem;
+  }
+
+  .note-body {
+    color: var(--text-sub);
     font-weight: 700;
-    font-size: 0.8rem;
+    font-size: 0.88rem;
+  }
+
+  @media (min-width: 720px) {
+    .shots {
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .notes {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
   }
 </style>
