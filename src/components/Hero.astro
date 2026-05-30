@@ -2,9 +2,37 @@
 // Hero — 方向A「ギャップを主役」+ 1画面に意味を詰める3ブロック構成。
 //   上: キッカー(小バッジ) / 中: 課題定義(見出し+≠+リード+CTA) / 下: セクション遷移ナビ+技術ページ+スクロール誘導
 import { APP_URL } from '../config';
+
+// 背景に散りばめる MBTI キャラ(public/characters/<TYPE>.png)。
+//  - コンテンツ(テキスト・カード)の背面に薄く敷く装飾。位置は四隅〜余白に寄せる。
+//  - hideSp: スマホでは間引いて表示する(詰め込みすぎ防止)。
+const DECOR = [
+  { type: 'ENFP', style: 'top: 7%;  left: 2%;   width: 92px; --rot: -10deg;', hideSp: false },
+  { type: 'INTJ', style: 'top: 33%; right: 2%;  width: 80px; --rot: 9deg;',   hideSp: true },
+  { type: 'ISFP', style: 'top: 55%; left: 1%;   width: 72px; --rot: 7deg;',   hideSp: true },
+  { type: 'ESTP', style: 'bottom: 17%; left: 5%; width: 84px; --rot: -8deg;', hideSp: false },
+  { type: 'ENTP', style: 'bottom: 9%;  right: 6%; width: 96px; --rot: 12deg;', hideSp: false },
+  { type: 'INFJ', style: 'top: 13%; right: 13%; width: 66px; --rot: -6deg;',  hideSp: true },
+  { type: 'ISTP', style: 'bottom: 40%; right: 3%; width: 68px; --rot: -11deg;', hideSp: true },
+] as const;
 ---
 
 <header class="hero">
+  <!-- 背景装飾: MBTI キャラを散りばめる(コンテンツの背面) -->
+  <div class="hero-decor" aria-hidden="true">
+    {
+      DECOR.map((d) => (
+        <img
+          class:list={['decor', { 'decor--hide-sp': d.hideSp }]}
+          src={`/characters/${d.type}.png`}
+          alt=""
+          loading="lazy"
+          style={d.style}
+        />
+      ))
+    }
+  </div>
+
   <!-- 上: キッカー -->
   <div class="kicker">
     <span class="kicker-badge"><span class="kicker-dot"></span>ゲームで暴く、本当の性格</span>
@@ -45,9 +73,12 @@ import { APP_URL } from '../config';
   <div class="hero-bottom">
     <nav class="jump" aria-label="セクションへ移動">
       <a class="jump-chip" href="#problem">課題</a>
+      <a class="jump-chip" href="#solution">解決</a>
       <a class="jump-chip" href="#measure">何を測る</a>
       <a class="jump-chip" href="#results">結果</a>
+      <a class="jump-chip" href="#craft">こだわり</a>
       <a class="jump-tech" href="/tech">技術・開発 →</a>
+      <a class="jump-tech" href="/team">開発体制 →</a>
     </nav>
     <span class="scroll-hint" aria-hidden="true">
       スクロールで詳しく <span class="arrow">↓</span>
@@ -57,11 +88,50 @@ import { APP_URL } from '../config';
 
 <style>
   .hero {
+    position: relative;
     overflow: hidden;
     padding: 1.75rem 0 2.25rem;
     display: flex;
     flex-direction: column;
     gap: 1.75rem;
+  }
+
+  /* --- 背景装飾: MBTI キャラ --- */
+  .hero-decor {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  /* コンテンツ(キッカー/メイン/下部ナビ)を装飾より前面に出す */
+  .hero > .kicker,
+  .hero > .inner,
+  .hero > .hero-bottom {
+    position: relative;
+    z-index: 1;
+  }
+
+  .decor {
+    position: absolute;
+    height: auto;
+    /* 黄色背景になじませつつ「散らかってる」軽さを出す: 薄め + わずかに傾ける */
+    opacity: 0.22;
+    transform: rotate(var(--rot, 0deg));
+    filter: saturate(1.1);
+    user-select: none;
+  }
+
+  /* スマホでは数を絞る(間引き) */
+  @media (max-width: 600px) {
+    .decor--hide-sp {
+      display: none;
+    }
+
+    .decor {
+      opacity: 0.16;
+    }
   }
 
   /* 上下ブロックも中央コンテナ幅に揃える */

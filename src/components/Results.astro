@@ -49,19 +49,45 @@ const NOTES = [
       </p>
     </div>
 
-    <!-- スクショ2枚を2カラム -->
+    <!-- スクショ2枚を2カラム。クリックで拡大表示 -->
     <ul class="shots">
       {
         SHOTS.map((shot) => (
           <li>
             <figure class="shot">
-              <img src={shot.src} alt={shot.alt} loading="lazy" />
+              <button
+                type="button"
+                class="shot-btn"
+                data-zoom
+                data-zoom-src={shot.src}
+                data-zoom-caption={shot.caption}
+                aria-label={`${shot.caption} を拡大表示`}
+              >
+                <img src={shot.src} alt={shot.alt} loading="lazy" />
+                <span class="shot-zoom" aria-hidden="true">⤢ タップで拡大</span>
+              </button>
               <figcaption class="shot-caption">{shot.caption}</figcaption>
             </figure>
           </li>
         ))
       }
     </ul>
+
+    <!-- 拡大表示用ライトボックス(全スクショ共通で 1 つを使い回す) -->
+    <dialog class="lightbox" id="result-lightbox" aria-label="結果画面の拡大表示">
+      <button
+        type="button"
+        class="lightbox-close"
+        data-zoom-close
+        aria-label="閉じる"
+      >
+        ×
+      </button>
+      <figure class="lightbox-fig">
+        <img class="lightbox-img" src="" alt="" />
+        <figcaption class="lightbox-cap"></figcaption>
+      </figure>
+    </dialog>
 
     <!-- 注釈3カード -->
     <ul class="notes">
@@ -104,13 +130,51 @@ const NOTES = [
     margin: 0;
   }
 
-  .shot img {
+  /* 画像をボタン化して「クリックで拡大」できるようにする */
+  .shot-btn {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: zoom-in;
+    position: relative;
+    border-radius: var(--radius-lg);
+  }
+
+  .shot-btn img {
     width: 100%;
     height: auto;
     border: var(--border-thick);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
     background: #fff;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+  }
+
+  .shot-btn:hover img {
+    transform: translate(-2px, -2px);
+    box-shadow: 13px 13px 0px var(--ink);
+  }
+
+  .shot-btn:active img {
+    transform: translate(3px, 3px);
+    box-shadow: 4px 4px 0 var(--ink);
+  }
+
+  /* 拡大できることを示すバッジ(右下) */
+  .shot-zoom {
+    position: absolute;
+    right: 0.7rem;
+    bottom: 0.7rem;
+    font-weight: 900;
+    font-size: 0.78rem;
+    color: #fff;
+    background: var(--ink);
+    border: 2px solid #fff;
+    border-radius: 999px;
+    padding: 0.2rem 0.7rem;
+    pointer-events: none;
   }
 
   .shot-caption {
@@ -158,6 +222,71 @@ const NOTES = [
     font-size: 0.88rem;
   }
 
+  /* --- ライトボックス(拡大表示) --- */
+  .lightbox {
+    width: min(96vw, 1400px);
+    max-width: none;
+    max-height: 94vh;
+    border: var(--border-thick);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    background: var(--cream);
+    padding: 1rem;
+    overflow: visible;
+  }
+
+  .lightbox::backdrop {
+    background: rgba(0, 0, 0, 0.7);
+  }
+
+  .lightbox-fig {
+    margin: 0;
+  }
+
+  .lightbox-img {
+    width: 100%;
+    max-height: 82vh;
+    object-fit: contain;
+    border: var(--border);
+    border-radius: var(--radius);
+    background: #fff;
+  }
+
+  .lightbox-cap {
+    text-align: center;
+    font-weight: 900;
+    font-size: 0.95rem;
+    margin-top: 0.75rem;
+  }
+
+  /* 閉じるボタン(右上に飛び出す) */
+  .lightbox-close {
+    position: absolute;
+    top: -0.9rem;
+    right: -0.9rem;
+    width: 2.6rem;
+    height: 2.6rem;
+    font-size: 1.5rem;
+    font-weight: 900;
+    line-height: 1;
+    color: var(--ink);
+    background: var(--accent-red);
+    border: var(--border);
+    border-radius: 999px;
+    box-shadow: 3px 3px 0 var(--ink);
+    cursor: pointer;
+    transition: opacity 0.15s ease, transform 0.08s ease;
+  }
+
+  .lightbox-close:hover {
+    opacity: 0.85;
+  }
+
+  .lightbox-close:active {
+    transform: translate(3px, 3px);
+    box-shadow: none;
+  }
+
   @media (min-width: 720px) {
     .shots {
       grid-template-columns: 1fr 1fr;
@@ -170,3 +299,37 @@ const NOTES = [
     }
   }
 </style>
+
+<script>
+  // 結果スクショのクリックで <dialog> を拡大表示する。
+  // 1 つの dialog を全スクショで使い回し、押されたボタンの画像を差し込む。
+  const dialog = document.getElementById('result-lightbox') as HTMLDialogElement | null;
+
+  if (dialog) {
+    const img = dialog.querySelector<HTMLImageElement>('.lightbox-img');
+    const cap = dialog.querySelector<HTMLElement>('.lightbox-cap');
+
+    document.querySelectorAll<HTMLButtonElement>('[data-zoom]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const src = btn.dataset.zoomSrc ?? '';
+        const caption = btn.dataset.zoomCaption ?? '';
+        if (img) {
+          img.src = src;
+          img.alt = caption;
+        }
+        if (cap) cap.textContent = caption;
+        dialog.showModal();
+      });
+    });
+
+    // 閉じるボタン
+    dialog
+      .querySelector('[data-zoom-close]')
+      ?.addEventListener('click', () => dialog.close());
+
+    // 背景(dialog 自身)クリックで閉じる。中身クリックは閉じない
+    dialog.addEventListener('click', (e) => {
+      if (e.target === dialog) dialog.close();
+    });
+  }
+</script>
