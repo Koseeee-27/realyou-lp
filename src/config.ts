@@ -141,7 +141,7 @@ export const MEMBER_GROUPS: { group: string; note?: string; members: Member[] }[
         role: 'デザイン / フロントエンド / MBTI キャラクターイラスト',
         icon: 'ogue.jpg',
         github: 'https://github.com/nightstar039',
-        x: 'https://x.com/link_38_ha',
+        x: 'https://x.com/link_create_09',
         comment:
           '創作大好き！！',
       },

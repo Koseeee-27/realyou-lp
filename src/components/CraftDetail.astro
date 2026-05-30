@@ -40,7 +40,7 @@ const BE_STEPS = [
 ---
 
 <section class="section section--cream section--roomy" id="craft-detail">
-  <div class="section__inner section__inner--wide">
+  <div class="section__inner">
     <h2 class="section-title"><span class="marker">実装のこだわり</span></h2>
 
     <div class="cols">
@@ -109,10 +109,17 @@ const BE_STEPS = [
 </section>
 
 <style>
+  /* FE / BE は常に縦積み(2カラムにすると窮屈で読みにくいため)。
+   * セクション間を太い区切りで分け、それぞれを主役として大きく見せる。 */
   .cols {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.75rem;
+  }
+
+  .col + .col {
+    padding-top: 2.75rem;
+    border-top: var(--border);
   }
 
   .col-head {
@@ -294,11 +301,14 @@ const BE_STEPS = [
     padding: 0 0.2em;
   }
 
-  @media (min-width: 860px) {
-    .cols {
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      align-items: start;
+  /* FE のポイントは横に並べて密度を出す(縦積みでも間延びしないように) */
+  @media (min-width: 640px) {
+    .fe-list {
+      flex-direction: row;
+    }
+
+    .fe-item {
+      flex: 1;
     }
 
     .axes {

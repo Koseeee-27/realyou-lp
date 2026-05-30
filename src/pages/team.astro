@@ -1,0 +1,18 @@
+---
+// src/pages/team.astro — 開発体制ページ(/team)。
+// チーム構成・役割分担をまとめる。技術の詳細は /tech、製品の魅力は / 側。
+// 見出し「開発体制」は Team コンポーネントが持つため、ここでは重複させない。
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Team from '../components/Team.astro';
+import Footer from '../components/Footer.astro';
+
+const title = '開発体制 | Real You';
+const description = 'Real You を作った学生チームの構成・役割分担の紹介。';
+---
+
+<Base title={title} description={description}>
+  <Header current="team" />
+  <Team />
+  <Footer />
+</Base>

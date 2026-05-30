@@ -1,0 +1,193 @@
+---
+// 課題 → 解決 の橋渡し。来場者向けに「Real You はどう解決するか」を平易に示す。
+// 数理やデータ取得方法は書かない(それは /tech の実装のこだわりに委ねる)。
+// 従来の診断との「ビフォーアフター」で違いを直感的に伝える。
+const COMPARE = [
+  {
+    kind: 'before' as const,
+    badge: 'これまでの診断',
+    method: ['質問に', '答える'],
+    points: ['「こうありたい」が混ざる', '質問の意図が見えてしまう'],
+    result: '理想の自分',
+  },
+  {
+    kind: 'after' as const,
+    badge: 'Real You',
+    method: ['行動で', '測る'],
+    points: ['無意識だから取り繕えない', '遊ぶうちに自然と引き出される'],
+    result: '本当の自分',
+  },
+] as const;
+---
+
+<section class="section section--cream" id="solution">
+  <div class="section__inner">
+    <h2 class="section-title"><span class="marker">だから、行動で測る。</span></h2>
+
+    <p class="solution-lead">
+      Real You は質問に答える診断ではありません。ゲームに夢中になっている間の<strong>“素の行動”</strong>そのものから、性格を測ります。
+    </p>
+
+    <div class="compare">
+      {
+        COMPARE.map((c, i) => (
+          <>
+            <article class={`compare-card compare-card--${c.kind}`}>
+              <span class="compare-badge">{c.badge}</span>
+              <p class="compare-method">
+                {c.method[0]}
+                <br />
+                {c.method[1]}
+              </p>
+              <ul class="compare-points">
+                {c.points.map((p) => (
+                  <li>{p}</li>
+                ))}
+              </ul>
+              <p class="compare-result">
+                <span class="compare-eq">＝</span>
+                {c.result}
+              </p>
+            </article>
+            {i === 0 && (
+              <span class="compare-arrow" aria-hidden="true">
+                →
+              </span>
+            )}
+          </>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .solution-lead {
+    font-size: clamp(1.1rem, 4.5vw, 1.4rem);
+    font-weight: 700;
+    max-width: var(--max-content);
+    margin-bottom: 2.5rem;
+  }
+
+  .solution-lead strong {
+    color: var(--accent-blue);
+  }
+
+  /* モバイル: 縦積み(card → ↓ → card)。PC: 横並び(card → → → card) */
+  .compare {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .compare-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--card);
+    border: var(--border);
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+    padding: 1.5rem 1.6rem;
+  }
+
+  /* 従来 = くすませて「過去」感。Real You = 黄色で主役 */
+  .compare-card--before {
+    background: #f4f4f4;
+    color: var(--text-sub);
+  }
+
+  .compare-card--after {
+    background: var(--accent-yellow);
+    border-width: 6.5px;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .compare-badge {
+    align-self: flex-start;
+    font-weight: 900;
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    border: 2.5px solid var(--ink);
+    border-radius: 999px;
+    padding: 0.15rem 0.85rem;
+    background: #fff;
+  }
+
+  .compare-card--after .compare-badge {
+    background: var(--accent-red);
+    color: #fff;
+  }
+
+  .compare-method {
+    font-size: clamp(1.6rem, 7vw, 2.1rem);
+    font-weight: 900;
+    line-height: 1.25;
+    color: var(--ink);
+    margin: 0.9rem 0 1rem;
+  }
+
+  .compare-points {
+    list-style: none;
+    margin: 0 0 1.1rem;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    flex: 1;
+  }
+
+  .compare-points li {
+    font-weight: 700;
+    font-size: 0.92rem;
+    padding-left: 1.1em;
+    position: relative;
+  }
+
+  .compare-points li::before {
+    content: '・';
+    position: absolute;
+    left: 0;
+  }
+
+  .compare-result {
+    font-weight: 900;
+    font-size: clamp(1.15rem, 5vw, 1.45rem);
+    color: var(--ink);
+    margin: 0;
+    border-top: 3px dashed var(--ink);
+    padding-top: 0.8rem;
+  }
+
+  .compare-eq {
+    margin-right: 0.2em;
+    color: var(--text-sub);
+  }
+
+  .compare-card--after .compare-eq {
+    color: var(--accent-red);
+  }
+
+  /* 矢印: モバイルは下向き(↓ 相当の回転)、PC は右向き */
+  .compare-arrow {
+    align-self: center;
+    justify-self: center;
+    font-size: 2.4rem;
+    font-weight: 900;
+    line-height: 1;
+    transform: rotate(90deg);
+    color: var(--ink);
+  }
+
+  @media (min-width: 760px) {
+    .compare {
+      grid-template-columns: 1fr auto 1fr;
+      gap: 1.25rem;
+    }
+
+    .compare-arrow {
+      transform: none;
+      font-size: 3rem;
+    }
+  }
+</style>
